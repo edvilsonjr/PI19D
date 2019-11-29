@@ -1,4 +1,4 @@
-import 'package:firebase_storage/firebase_storage.dart';
+//import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -127,7 +127,7 @@ bool teste = false;
                       } else {
 
                           // _contatoEditado.img = file.path;
-                          StorageUploadTask task = FirebaseStorage
+                          /*StorageUploadTask task = FirebaseStorage
                               .instance
                               .ref()
                               .child("foto"+DateTime.now().toString()) //nome do arquivo
@@ -136,7 +136,7 @@ bool teste = false;
                           StorageTaskSnapshot taskSnapshot = await task.onComplete;
 
                           String url = await taskSnapshot.ref.getDownloadURL();
-                          print(url);
+                          print(url);*/
 
                       }
                     });
