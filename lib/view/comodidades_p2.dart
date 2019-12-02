@@ -26,11 +26,11 @@ class _PessoaMesaState extends State<PessoaMesa> {
           "Cadastro da Chácara",
           style: TextStyle(
             fontSize: 23,
-            color: Colors.white,
+            color: Colors.deepOrange[400],
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.deepOrangeAccent,
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Column(

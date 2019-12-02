@@ -44,11 +44,11 @@ class _DiariasState extends State<Diarias> {
           "Cadastro da Chácara",
           style: TextStyle(
             fontSize: 23,
-            color: Colors.white,
+            color: Colors.deepOrange[400],
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.deepOrangeAccent,
+        backgroundColor: Colors.green[100],
       ),
       body: SingleChildScrollView(
         child: Column(

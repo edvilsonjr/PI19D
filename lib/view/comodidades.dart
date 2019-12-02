@@ -44,11 +44,11 @@ class _ComodidadeState extends State<Comodidade> {
           "Cadastro da Chácara",
           style: TextStyle(
             fontSize: 23,
-            color: Colors.white,
+            color: Colors.deepOrange[400],
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.deepOrangeAccent,
+        backgroundColor: Colors.white,
       ),
       body: SingleChildScrollView(
         child: Column(

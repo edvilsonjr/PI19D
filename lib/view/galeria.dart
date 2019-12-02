@@ -1,4 +1,4 @@
-//import 'package:firebase_storage/firebase_storage.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -11,8 +11,8 @@ class Galeria extends StatefulWidget {
 }
 
 class _GaleriaState extends State<Galeria> {
-
-bool teste = false;
+  bool teste = false;
+  Map<int, dynamic> Fotos = Map();
 
   @override
   Widget build(BuildContext context) {
@@ -23,144 +23,132 @@ bool teste = false;
           "Cadastro da Chácara",
           style: TextStyle(
             fontSize: 23,
-            color: Colors.white,
+            color: Colors.deepOrange[400],
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.deepOrangeAccent,
+        backgroundColor: Colors.white,
       ),
-    body: GestureDetector(
-      child: Container(
-        color: Colors.grey[350],
-        child: Icon(Icons.add, color: Colors.white70,),
+      body: Column(
+        children: <Widget>[
+          Padding(
+            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+            child: Text(
+              "Adicione até 6 fotos da chácara:",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+            ),
+          ),
+          Expanded(
+            child: GaleriaImagem(context),
+          ),
+          RaisedButton(
+            onPressed: () {},
+            color: Colors.green[300],
+            child: Text(
+              "Finalizar",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  color: Colors.white,
+                  fontSize: 18.0),
+            ),
+          )
+        ],
       ),
-      onTap: Adicionar,
-      
-    )
     );
   }
 
   /*----------------------------------GRID------------------------------------*/
-//Criar a tela body dos gifs
-/*Widget _criarGifMesa(BuildContext context, AsyncSnapshot snapshot) {
-  return GridView.builder(
-    gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-      crossAxisCount: 2,
-      crossAxisSpacing: 10.0,
-      mainAxisSpacing: 10.0,
-    ),
-    //itemCount: snapshot.data["data"].length,
-    itemCount: _getQuantidadeGifs(snapshot.data["data"]),
-    itemBuilder: (context, index) {
-      if (busca == null || index < snapshot.data["data"].length) {
-        return GestureDetector(
-          onLongPress: (){
-            Share.share(snapshot.data["data"][index]["images"]["fixed_height"]["url"]);
-          },
-          onTap: () {
-            print("A $index");
-
-            Navigator.push(
-              context,
-              MaterialPageRoute(
-                  builder: (context) =>
-                      GifPage(snapshot.data["data"][index])),
-            );
-          },
-          child: FadeInImage.memoryNetwork(
-            placeholder: kTransparentImage,
-            image: snapshot.data["data"][index]["images"]["fixed_height"]
-            ["url"],
-            fit: BoxFit.cover,
-            height: 300,
-          ),
-          //child: Image.network(
-          //  snapshot.data["data"][index]["images"]["fixed_height"]["url"],
-          //  fit: BoxFit.cover,
-          //),
-        );
-      } else {
-        return Container(
-          child: GestureDetector(
+  Widget GaleriaImagem(BuildContext context, {AsyncSnapshot snapshot}) {
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+        ),
+        itemCount: 6,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            child: Container(
+                color: Colors.grey[200],
+                child: Fotos[index] == null
+                    ? Icon(
+                        Icons.add_circle,
+                        color: Colors.black,
+                      )
+                    : Image.network(Fotos[index])),
             onTap: () {
-              setState(() {
-                offset += 19;
-              });
+              return showDialog(
+                context: context,
+                builder: (context) {
+                  return AlertDialog(
+                    title: Text("Escolha uma das opções abaixo:"),
+                    //content: Text("Se sair as alterações serão perdidas"),
+                    actions: <Widget>[
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+                            ImagePicker.pickImage(source: ImageSource.camera)
+                                .then((file) async {
+                              if (file == null) {
+                                return;
+                              } else {
+                                StorageUploadTask task = FirebaseStorage
+                                    .instance
+                                    .ref()
+                                    .child("foto" +
+                                        DateTime.now()
+                                            .toString()) //nome do arquivo
+                                    .putFile(file);
+
+                                StorageTaskSnapshot taskSnapshot =
+                                    await task.onComplete;
+
+                                String url =
+                                    await taskSnapshot.ref.getDownloadURL();
+                                print(url);
+                                setState(() {
+                                  Fotos[index] = url;
+                                });
+                              }
+                            });
+                          },
+                          child: Text("Câmera")),
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.pop(context);
+
+                            ImagePicker.pickImage(source: ImageSource.gallery)
+                                .then((file) async {
+                              if (file == null) {
+                                return;
+                              } else {
+                                StorageUploadTask task = FirebaseStorage
+                                    .instance
+                                    .ref()
+                                    .child("foto_galeria" +
+                                        DateTime.now()
+                                            .toString()) //nome do arquivo
+                                    .putFile(file);
+
+                                StorageTaskSnapshot taskSnapshot =
+                                    await task.onComplete;
+
+                                String url =
+                                    await taskSnapshot.ref.getDownloadURL();
+                                print(url);
+                                setState(() {
+                                  Fotos[index] = url;
+                                });
+                              }
+                            });
+                          },
+                          child: Text("Galeria")),
+                    ],
+                  );
+                },
+              );
             },
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Icon(
-                  Icons.add,
-                  color: Colors.white,
-                  size: 70,
-                ),
-                Text(
-                  "Ver mais...",
-                  style: TextStyle(color: Colors.white, fontSize: 22),
-                ),
-              ],
-            ),
-          ),
-        );
-      }
-    },
-  );
-}
-  */
-
-  Future<bool> Adicionar() {
-     showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Text("Escolha uma das opções abaixo:"),
-            //content: Text("Se sair as alterações serão perdidas"),
-            actions: <Widget>[
-              FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    ImagePicker.pickImage(source: ImageSource.camera)
-                        .then((file) async {
-                      if (file == null) {
-                        return;
-                      } else {
-
-                          // _contatoEditado.img = file.path;
-                          /*StorageUploadTask task = FirebaseStorage
-                              .instance
-                              .ref()
-                              .child("foto"+DateTime.now().toString()) //nome do arquivo
-                              .putFile(file);
-
-                          StorageTaskSnapshot taskSnapshot = await task.onComplete;
-
-                          String url = await taskSnapshot.ref.getDownloadURL();
-                          print(url);*/
-
-                      }
-                    });
-                  },
-                  child: Text("Câmera")),
-              FlatButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                    //Navigator.pop(context);
-                    ImagePicker.pickImage(source: ImageSource.gallery)
-                        .then((file) {
-                      if (file == null) {
-                        return;
-                      } else {
-                        setState(() {
-                          // _contatoEditado.img = file.path;
-                        });
-                      }
-                    });
-                  },
-                  child: Text("Galeria")),
-            ],
           );
         });
-    return Future.value(true);
-}
+  }
 }

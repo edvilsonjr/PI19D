@@ -10,6 +10,7 @@ class _TelaLoginState extends State<TelaLogin> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.green[100],
       body: Column(
         children: <Widget>[
           Padding(

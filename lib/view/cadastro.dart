@@ -12,10 +12,10 @@ class _CadastroState extends State<Cadastro> {
       appBar: AppBar(
         title: Text(
           "Cadastro",
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.deepOrange[400]),
         ),
         centerTitle: true,
-        backgroundColor: Colors.deepOrange,
+        backgroundColor: Colors.white,
       ),
       body:
       SingleChildScrollView(child: Container(

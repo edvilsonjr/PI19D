@@ -33,9 +33,10 @@ class _homeState extends State<home> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
+
         appBar: AppBar(
           iconTheme: IconThemeData(color: Colors.deepOrange),
-          title: Text("Home",style: TextStyle(color: Colors.deepOrange),),
+          title: Text("Home",style: TextStyle(color: Colors.deepOrangeAccent),),
           centerTitle: true,
           backgroundColor: Colors.white,
           bottom: TabBar(
