@@ -1,6 +1,7 @@
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:pi/view/pagina_chacara.dart';
 
 class Galeria extends StatefulWidget {
   PageController page = PageController();
@@ -42,7 +43,12 @@ class _GaleriaState extends State<Galeria> {
             child: GaleriaImagem(context),
           ),
           RaisedButton(
-            onPressed: () {},
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => PaginaChacara(context, Fotos)));
+            },
             color: Colors.green[300],
             child: Text(
               "Finalizar",
