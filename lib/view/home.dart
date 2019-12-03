@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/view/drawer.dart';
 
 class home extends StatefulWidget {
   home({Key key}) : super(key: key);
@@ -7,28 +8,12 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-  List _cidades =
-  ["São João da Boa Vista", "Vargem Grande", "Águas da Prata", "Pinhal", "Campinas"];
 
-  List<DropdownMenuItem<String>> _dropDownMenuItems;
-  String _cidadeatual;
+  String dropdownValue;
+  String dropdownValue2;
+
   @override
-  void initState() {
-    _dropDownMenuItems = getDropDownMenuItems();
-    _cidadeatual = _dropDownMenuItems[0].value;
-    super.initState();
-  }
 
-  List<DropdownMenuItem<String>> getDropDownMenuItems() {
-    List<DropdownMenuItem<String>> items = new List();
-    for (String city in _cidades) {
-      items.add(new DropdownMenuItem(
-          value: city,
-          child: new Text(city)
-      ));
-    }
-    return items;
-  }
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
@@ -46,52 +31,114 @@ class _homeState extends State<home> {
                 child: Text("Chácara", style: TextStyle(color: Colors.deepOrange),),
               ),
               Tab(
-                text: "2",
+                child: Text("2", style: TextStyle(color: Colors.deepOrange),),
               ),
               Tab(
-                text: "3",
+                child: Text("3", style: TextStyle(color: Colors.deepOrange),),
               ),
             ],
           ),
         ),
-        drawer: Drawer(
-
-          child: Column(
-
-            children: <Widget>[
-              DrawerHeader(
-                child: Image.asset(
-                  'imagem/semfundo.png',
-                  width: 250,
-                  height: 250,
-                ),
-              ),
-              Divider(
-                color: Colors.deepOrange,
-              ),
-              Column(
-                children: <Widget>[
-                  Text("Perfil", style: TextStyle(color: Colors.deepOrange,fontSize: 20),),
-
-                ],
-              ),
-            ],
-          ),
-        ),
+        drawer: PageDwawer(),
         body: TabBarView(
           children: <Widget>[
-            Container(
+            SingleChildScrollView(
                 child: Padding(
-                  padding: const EdgeInsets.all(10.0),
+                  padding: const EdgeInsets.all(15.0),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                        Text("Filtros", ),
-                        new DropdownButton(
-                          value: _cidadeatual,
-                          items: _dropDownMenuItems,
-                          onChanged: changedDropDownItem,
+                        Center(child: Text("Filtros")),
+                           Row(
+                            children: <Widget>[
+                              Text("Cidade:  "),
+                              DropdownButton<String>(
+                                value: dropdownValue,
+                                iconSize: 24,
+                                elevation: 16,
+                                underline: Container(
+                                  height: 2,
+                                  color: Colors.deepOrange,
+                                ),
+                                onChanged: (String newValue) {
+                                  setState(() {
+                                    dropdownValue = newValue;
+                                  });
+                                },
+                                items: <String>['São João da Boa Vista', 'Águas da Prata', 'Campinas', 'São Paulo']
+                                    .map<DropdownMenuItem<String>>((String value) {
+                                  return DropdownMenuItem<String>(
+                                    value: value,
+                                    child: Text(value),
+                                  );
+                                })
+                                    .toList(),
+                              ),
+                            ],
+                          ),
+
+                        Row(
+                          children: <Widget>[
+                            Text("Preço:  "),
+                            DropdownButton<String>(
+                              value: dropdownValue2,
+                              iconSize: 24,
+                              elevation: 16,
+                              underline: Container(
+                                height: 2,
+                                color: Colors.deepOrange,
+                              ),
+                              onChanged: (String newValue) {
+                                setState(() {
+                                  dropdownValue2 = newValue;
+                                });
+                              },
+                              items: <String>['Menos de 250 R\$', 'De 250 à 500 R\$', 'De 500 à 750 R\$', 'De 750 à 1000','Mais de 1000']
+                                  .map<DropdownMenuItem<String>>((String value) {
+                                return DropdownMenuItem<String>(
+                                  value: value,
+                                  child: Text(value),
+                                );
+                              })
+                                  .toList(),
+                            ),
+                          ],
                         ),
+                      Center(
+                        child: RaisedButton(
+
+                          padding: EdgeInsets.symmetric(horizontal: 30),
+                          onPressed: () {
+                            Navigator.of(context).pushNamed('/Cadastro');
+                          },
+                          color: Colors.deepOrange,
+                          child: Text("Procurar",
+                              style: TextStyle(color: Colors.white)),
+                        ),
+                      ),
+                        Divider(
+                          color: Colors.black,
+                          height: 2,
+                        ),
+                        /*GridView.builder(
+                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 10.0,
+                            mainAxisSpacing: 10.0,
+                          ),
+                          itemCount: 4,
+                          itemBuilder: (context, index){
+                            return Container(
+                                color: Colors.grey[200],
+                                child: Icon(
+                                  Icons.add_circle,
+                                  color: Colors.black,
+                                )
+                            );
+                          }),
+                        */
                     ],
+
                   ),
                 ),
             ),
@@ -105,11 +152,6 @@ class _homeState extends State<home> {
         ),
       ),
     );
-  }
-  void changedDropDownItem(String selectedCity) {
-    setState(() {
-      _cidadeatual = selectedCity;
-    });
   }
 
 }

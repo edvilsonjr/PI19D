@@ -12,12 +12,13 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: CadChacara(),
+      home: TelaLogin(),
       debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
           '/TelaLogin': (BuildContext context) => TelaLogin(),
           '/Cadastro': (BuildContext context) => Cadastro(),
           '/Home' : (BuildContext context) => home(),
+          '/CadChacara' : (BuildContext context) => CadChacara(),
         }
     );
   }

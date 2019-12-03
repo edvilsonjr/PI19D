@@ -11,10 +11,11 @@ class _TelaLoginState extends State<TelaLogin> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.green[100],
-      body: Column(
+      body: SingleChildScrollView(
+      child: Column(
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: Image.asset(
               'imagem/semfundo.png',
               width: 250,
@@ -36,7 +37,7 @@ class _TelaLoginState extends State<TelaLogin> {
               //padding: EdgeInsets.all(20),
               child: Padding(
                 padding:
-                    const EdgeInsets.symmetric(vertical: 20, horizontal: 40),
+                    const EdgeInsets.symmetric(vertical: 15, horizontal: 40),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
@@ -48,6 +49,10 @@ class _TelaLoginState extends State<TelaLogin> {
                         hintText: "Senha",
                       ),
                       obscureText: true,
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text("Esqueci minha senha"),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(10),
@@ -99,6 +104,7 @@ class _TelaLoginState extends State<TelaLogin> {
           ),
           //  ),
         ],
+      ),
       ),
     );
   }
