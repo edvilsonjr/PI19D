@@ -14,15 +14,25 @@ class PageDrawer extends StatelessWidget {
                 color: Colors.green[100],
               ),
             ),
-            Divider(),
             ListTile(
               title: Text('Cadastro Chacara', style: TextStyle(fontSize: 20)),
               onTap: () {
                 Navigator.of(context).pushNamed('/CadChacara');
               },
+              trailing: Icon(Icons.arrow_forward_ios) ,
             ),
-
-
+            ListTile(
+              title: Text('Perfil', style: TextStyle(fontSize: 20)),
+              onTap: () {
+                Navigator.of(context).pushNamed('/CadChacara');
+              },
+            ),
+            ListTile(
+              title: Text('Desconectar', style: TextStyle(fontSize: 20)),
+              onTap: () {
+                Navigator.of(context).pushNamed('/TelaLogin');
+              },
+            ),
           ],
         ),
     );

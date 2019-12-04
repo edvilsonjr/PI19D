@@ -109,7 +109,6 @@ class _homeState extends State<home> {
 
                           padding: EdgeInsets.symmetric(horizontal: 30),
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/Cadastro');
                           },
                           color: Colors.deepOrange[400],
                           child: Text("Procurar",
@@ -130,16 +129,46 @@ class _homeState extends State<home> {
                           itemCount: 8,
                           itemBuilder: (context, index){
                             return Container(
+                                child: Padding(
+                                  padding: const EdgeInsets.all(8.0),
+                                  child: Column(
+                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    children: <Widget>[
+                                      Container(
+                                        child: Icon(
+                                            Icons.image,
+                                            size: 75,
+                                        ),
+                                        height: 110,
+                                        width: 175,
+                                        decoration: BoxDecoration(
+                                          color: Colors.grey[400],
+                                        ),
 
-                                color: Colors.grey[400],
-                                child: Icon(
-                                  Icons.add_circle,
-                                  color: Colors.black,
-                                )
+                                      ),
+
+                                      Text("Nome Chacara",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
+                                      Text("São João da Boa Vista",style: TextStyle(fontSize: 13)),
+                                      Row(
+                                        children: <Widget>[
+                                          Text("300 R\$/D",style: TextStyle(fontSize: 13)),
+                                          Padding(
+                                            padding: const EdgeInsets.only(left: 65),
+                                            child: Icon(
+                                              Icons.star,
+                                              color: Colors.yellow[700],
+                                            ),
+                                          ),
+                                          Text("4.0"),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                ),
                             );
 
                           }),
-                            ),
+                        ),
 
                     ],
 
