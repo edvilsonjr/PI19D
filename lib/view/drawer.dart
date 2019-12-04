@@ -1,31 +1,28 @@
 import 'package:flutter/material.dart';
 
-class PageDwawer extends StatelessWidget {
+class PageDrawer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
         child: ListView(
           children: <Widget>[
-            DrawerHeader(
-              child: Image.asset(
-                'imagem/semfundo.png',
-                width: 250,
-                height: 250,
+            UserAccountsDrawerHeader(
+              accountEmail: Text("Edvilson2000@gmail.com", style: TextStyle(color: Colors.black),),
+              accountName: Text("Edvilson Dos Santos", style: TextStyle(color: Colors.black),),
+              currentAccountPicture: Icon(Icons.person, size: 50,),
+              decoration: BoxDecoration(
+                color: Colors.green[100],
               ),
             ),
+            Divider(),
             ListTile(
-              title: Text('Cadastro Chacara'),
+              title: Text('Cadastro Chacara', style: TextStyle(fontSize: 20)),
               onTap: () {
                 Navigator.of(context).pushNamed('/CadChacara');
               },
             ),
-            ListTile(
-              title: Text('Item 1'),
-              onTap: () {
-                // Update the state of the app.
-                // ...
-              },
-            ),
+
+
           ],
         ),
     );

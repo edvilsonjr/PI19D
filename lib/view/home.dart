@@ -20,35 +20,35 @@ class _homeState extends State<home> {
       child: Scaffold(
 
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.deepOrange),
-          title: Text("Home",style: TextStyle(color: Colors.deepOrangeAccent),),
+          iconTheme: IconThemeData(color: Colors.deepOrange[400]),
+          title: Text("Home",style: TextStyle(color: Colors.deepOrangeAccent[400]),),
           centerTitle: true,
           backgroundColor: Colors.white,
           bottom: TabBar(
-            indicatorColor: Colors.deepOrange,
+            indicatorColor: Colors.deepOrange[400],
             tabs: <Widget>[
               Tab(
-                child: Text("Chácara", style: TextStyle(color: Colors.deepOrange),),
+                child: Text("Chácara", style: TextStyle(color: Colors.deepOrange[400]),),
               ),
               Tab(
-                child: Text("2", style: TextStyle(color: Colors.deepOrange),),
+                child: Text("2", style: TextStyle(color: Colors.deepOrange[400]),),
               ),
               Tab(
-                child: Text("3", style: TextStyle(color: Colors.deepOrange),),
+                child: Text("3", style: TextStyle(color: Colors.deepOrange[400]),),
               ),
             ],
           ),
         ),
-        drawer: PageDwawer(),
+        drawer: PageDrawer(),
         body: TabBarView(
           children: <Widget>[
-            SingleChildScrollView(
-                child: Padding(
+            //SingleChildScrollView(
+                //child:
+        Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    //crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                        Center(child: Text("Filtros")),
                            Row(
                             children: <Widget>[
                               Text("Cidade:  "),
@@ -58,7 +58,7 @@ class _homeState extends State<home> {
                                 elevation: 16,
                                 underline: Container(
                                   height: 2,
-                                  color: Colors.deepOrange,
+                                  color: Colors.deepOrange[400],
                                 ),
                                 onChanged: (String newValue) {
                                   setState(() {
@@ -86,7 +86,7 @@ class _homeState extends State<home> {
                               elevation: 16,
                               underline: Container(
                                 height: 2,
-                                color: Colors.deepOrange,
+                                color: Colors.deepOrange[400],
                               ),
                               onChanged: (String newValue) {
                                 setState(() {
@@ -104,14 +104,14 @@ class _homeState extends State<home> {
                             ),
                           ],
                         ),
-                      Center(
+                      Container(
                         child: RaisedButton(
 
                           padding: EdgeInsets.symmetric(horizontal: 30),
                           onPressed: () {
                             Navigator.of(context).pushNamed('/Cadastro');
                           },
-                          color: Colors.deepOrange,
+                          color: Colors.deepOrange[400],
                           child: Text("Procurar",
                               style: TextStyle(color: Colors.white)),
                         ),
@@ -120,28 +120,32 @@ class _homeState extends State<home> {
                           color: Colors.black,
                           height: 2,
                         ),
-                        /*GridView.builder(
+                        Expanded(child:
+                        GridView.builder(
                           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
                             crossAxisSpacing: 10.0,
                             mainAxisSpacing: 10.0,
                           ),
-                          itemCount: 4,
+                          itemCount: 8,
                           itemBuilder: (context, index){
                             return Container(
-                                color: Colors.grey[200],
+
+                                color: Colors.grey[400],
                                 child: Icon(
                                   Icons.add_circle,
                                   color: Colors.black,
                                 )
                             );
+
                           }),
-                        */
+                            ),
+
                     ],
 
                   ),
                 ),
-            ),
+            //),
             Container(
 
             ),
