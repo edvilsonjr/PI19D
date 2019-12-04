@@ -71,6 +71,7 @@ class _TelaLoginState extends State<TelaLogin> {
                                         title: Text("Esqueci minha senha"),
                                         content: Column(
                                           mainAxisSize: MainAxisSize.min,
+
                                           children: <Widget>[
                                             Text(
                                                 "Informe seu e-mail cadastrado para redefinir sua senha:"),
