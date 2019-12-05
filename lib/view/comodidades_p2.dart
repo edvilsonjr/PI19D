@@ -38,7 +38,7 @@ class _PessoaMesaState extends State<PessoaMesa> {
             Padding(
               padding: const EdgeInsets.only(right: 18.0, top: 8.0),
               child: Text(
-                "Informe a quantidade máxima de pessoas:",
+                "Estime a quantidade máxima de pessoas no local:",
                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
               ),
             ),
@@ -58,7 +58,7 @@ class _PessoaMesaState extends State<PessoaMesa> {
               padding: const EdgeInsets.only(left: 15.0, top: 20.0),
               child: Text(
                 "Há espaço para colocar mesas? Se sim, informe a quantidade "
-                    "aproximada, considerando uma mesa com 4 cadeiras.",
+                    "estimada, considerando uma mesa com 4 cadeiras.",
                 style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
               ),
             ),
