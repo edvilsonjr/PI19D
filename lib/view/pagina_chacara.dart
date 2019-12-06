@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import 'calendario.dart';
+
 class PaginaChacara extends StatefulWidget {
   Map<int, dynamic> CapaPrincipal = Map();
 
@@ -12,8 +14,6 @@ class PaginaChacara extends StatefulWidget {
 
 class _PaginaChacaraState extends State<PaginaChacara> {
   bool teste = true;
-  Map<int, dynamic> Fotos = Map();
-
 
   @override
   Widget build(BuildContext context) {
@@ -98,7 +98,12 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                 ),
                 Expanded(
                   child: IconButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Calendario()));
+                    },
                     icon: Icon(FontAwesomeIcons.calendarAlt),
                   ),
                 ),
@@ -346,8 +351,35 @@ class _PaginaChacaraState extends State<PaginaChacara> {
             ),
             teste ? Estimativa() : Text(""),
             /*---------------------------------------------------------------------------*/
-            Text("Galeria"),
-            Expanded(child:GridGaleria(widget.CapaPrincipal)),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Divider(
+                color: Colors.black,
+                height: 20.0,
+              ),
+            ),
+            Text("Galeria", style: TextStyle(fontWeight: FontWeight.bold),),
+
+//    GridGaleria(widget.CapaPrincipal)
+//            GridView.builder(
+//                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+//                  crossAxisCount: 2,
+//                  crossAxisSpacing: 10.0,
+//                  mainAxisSpacing: 10.0,
+//                ),
+//                itemCount: 6,
+//                itemBuilder: (context, index) {
+//                  return GestureDetector(
+//                      child: Container(
+//                          color: Colors.grey[200],
+//                          child: widget.CapaPrincipal[index] == null
+//                              ? Icon(
+//                                  Icons.photo,
+//                                  color: Colors.black,
+//                                )
+//                              : Image.network(widget.CapaPrincipal[index])),
+//                      onTap: () {});
+//                }),
           ],
         ),
       ),
@@ -404,42 +436,11 @@ Widget Estimativa() {
               ),
             ),
             Text("200"),
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Divider(
-                color: Colors.black,
-                height: 20.0,
-              ),
-            ),
+//
           ],
         ),
       ),
     ],
   );
-}
-
-Widget GridGaleria(Map Fotos){
-  return GridView.builder(
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        crossAxisSpacing: 10.0,
-        mainAxisSpacing: 10.0,
-      ),
-      itemCount: 6,
-      itemBuilder: (context, index) {
-        return GestureDetector(
-          child: Container(
-              color: Colors.grey[200],
-              child: Fotos[index] == null
-                  ? Icon(
-                Icons.photo,
-                color: Colors.black,
-              )
-                  : Image.network(Fotos[index])),
-          onTap: () {}
-        );
-      }
-      );
-
 }
 
