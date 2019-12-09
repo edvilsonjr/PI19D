@@ -11,7 +11,7 @@ class _CalendarioState extends State<Calendario> {
   Map<DateTime, List<dynamic>> _events;
   TextEditingController _eventController;
   List<dynamic> _selectedEvents;
-  String qualquercoisa = "";
+
 
   @override
   void initState() {
@@ -42,9 +42,7 @@ class _CalendarioState extends State<Calendario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.save), onPressed: (){})
-        ],
+        actions: <Widget>[IconButton(icon: Icon(Icons.save), onPressed: () {})],
         title: Text("Calendário"),
         backgroundColor: Colors.green[900],
       ),
@@ -53,20 +51,24 @@ class _CalendarioState extends State<Calendario> {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             TableCalendar(
-
               events: _events,
               calendarStyle: CalendarStyle(
-                  todayColor: Colors.orange,
+                  todayColor: Colors.green[800],
                   todayStyle: TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
+                      fontSize: 16.0,
                       color: Colors.white),
-                  selectedColor: Colors.green[800],
+                  selectedColor: Colors.deepOrange[400],
                   selectedStyle: TextStyle(
-                      fontWeight: FontWeight.bold, color: Colors.white)),
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 16.0)),
               headerStyle: HeaderStyle(
                 centerHeaderTitle: true,
               ),
+              daysOfWeekStyle: DaysOfWeekStyle(
+                  weekendStyle: TextStyle(color: Colors.deepOrange[400])),
+              locale: 'en_US',
               onDaySelected: (date, events) {
                 // print(date.toIso8601String());
                 setState(() {
@@ -75,14 +77,19 @@ class _CalendarioState extends State<Calendario> {
               },
               calendarController: _controller,
             ),
-            ..._selectedEvents.map((event) => ListTile(
-                  title: Text(event),
-                )),
+            ListTile(
+              title: _selectedEvents.isEmpty
+                  ? Text("")
+                  : Text(_selectedEvents[0].toString()),
+            ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.add), onPressed: _showAddDialog),
+        child: Icon(Icons.add),
+        onPressed: _showAddDialog,
+        backgroundColor: Colors.deepOrange[400],
+      ),
     );
   }
 
@@ -99,7 +106,7 @@ class _CalendarioState extends State<Calendario> {
                       onPressed: () {
                         setState(() {
                           _events[_controller.selectedDay] = ["Alugada"];
-                          qualquercoisa = "Alugada";
+
                           Navigator.pop(context);
                         });
                       },
@@ -117,7 +124,7 @@ class _CalendarioState extends State<Calendario> {
                       onPressed: () {
                         setState(() {
                           _events[_controller.selectedDay] = ["A confirmar"];
-                          qualquercoisa = "A confirmar";
+
                           Navigator.pop(context);
                         });
                       },
@@ -146,29 +153,6 @@ class _CalendarioState extends State<Calendario> {
                   )
                 ],
               ),
-//              content: TextField(
-//                controller: _eventController,
-//              ),
-              // actions: <Widget>[
-//                FlatButton(
-//                    onPressed: () {
-//                      if (_eventController.text.isEmpty) return;
-//                      setState(() {
-//                        if (_events[_controller.selectedDay] != null) {
-//                          _events[_controller.selectedDay]
-//                              .add(_eventController.text);
-//                        } else {
-//                          _events[_controller.selectedDay] = [
-//                            _eventController.text
-//                          ];
-//                        }
-//                        _eventController.clear();
-//                        Navigator.pop(context);
-//                      });
-//
-//                    },
-//                    child: Text("Salvar"))
-              //],
             ));
   }
 }

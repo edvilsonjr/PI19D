@@ -5,17 +5,16 @@ import 'package:pi/view/pagina_galeria_chacara.dart';
 import 'calendario.dart';
 import 'drawer.dart';
 
-class PaginaChacara extends StatefulWidget {
-  Map<int, dynamic> CapaPrincipal = Map();
+class ChacaraHome extends StatefulWidget {
 
-  PaginaChacara(context, this.CapaPrincipal);
 
   @override
-  _PaginaChacaraState createState() => _PaginaChacaraState();
+  _ChacaraHomeState createState() => _ChacaraHomeState();
 }
 
-class _PaginaChacaraState extends State<PaginaChacara> {
+class _ChacaraHomeState extends State<ChacaraHome> {
   bool teste = false;
+  Map<int, dynamic> Fotos = Map();
 
   @override
   Widget build(BuildContext context) {
@@ -35,9 +34,10 @@ class _PaginaChacaraState extends State<PaginaChacara> {
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-                child: widget.CapaPrincipal[0] == null
-                    ? Icon(Icons.photo)
-                    : Image.network(widget.CapaPrincipal[0])),
+//                child: widget.CapaPrincipal[0] == null
+//                    ? Icon(Icons.photo)
+//                    : Image.network(widget.CapaPrincipal[0])),
+        child: Icon(Icons.photo)),
             Divider(
               color: Colors.black,
               height: 2.0,
@@ -51,7 +51,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                   child: Text(
                     "Chácara A",
                     style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                    TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -87,15 +87,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                     ],
                   ),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 63.0),
-                  child: Text(
-                    "Editar datas:",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.deepOrange[400]),
-                  ),
-                ),
+
                 Expanded(
                   child: IconButton(
                     onPressed: () {
@@ -363,7 +355,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
               child: Text(
                 "Galeria",
                 style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white,fontSize: 17.0),
+                TextStyle(fontWeight: FontWeight.bold, color: Colors.white,fontSize: 17.0),
               ),
             ),
           ],
@@ -371,61 +363,61 @@ class _PaginaChacaraState extends State<PaginaChacara> {
       ),
     );
   }
-}
-
-Widget Estimativa() {
-  return Column(
-    children: <Widget>[
-      Text(
-        "Estimativas: ",
-        style: TextStyle(fontWeight: FontWeight.bold),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 45.0),
-              child: Icon(
-                FontAwesomeIcons.userFriends,
-                size: 13.0,
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Text(
-                "Capacidade Máxima de Pessoas: ",
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-            ),
-            Text("200"),
-            //Text("pessoas"),
-          ],
+  Widget Estimativa() {
+    return Column(
+      children: <Widget>[
+        Text(
+          "Estimativas: ",
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
-      ),
-      Padding(
-        padding: const EdgeInsets.only(top: 8.0),
-        child: Row(
-          children: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(left: 45.0),
-              child: Icon(
-                FontAwesomeIcons.chair,
-                size: 13.0,
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 45.0),
+                child: Icon(
+                  FontAwesomeIcons.userFriends,
+                  size: 13.0,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.only(left: 8.0),
-              child: Text(
-                "Capacidade de Mesas com 4 lugares: ",
-                style: TextStyle(fontWeight: FontWeight.bold),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "Capacidade Máxima de Pessoas: ",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
               ),
-            ),
-            Text("200"),
+              Text("200"),
+              //Text("pessoas"),
+            ],
+          ),
+        ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Row(
+            children: <Widget>[
+              Padding(
+                padding: const EdgeInsets.only(left: 45.0),
+                child: Icon(
+                  FontAwesomeIcons.chair,
+                  size: 13.0,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 8.0),
+                child: Text(
+                  "Capacidade de Mesas com 4 lugares: ",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              Text("200"),
 //
-          ],
+            ],
+          ),
         ),
-      ),
-    ],
-  );
+      ],
+    );
+  }
+
 }

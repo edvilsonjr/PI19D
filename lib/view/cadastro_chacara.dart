@@ -67,14 +67,6 @@ class _CadChacaraState extends State<CadChacara> {
                       )
                     ],
                   ),
-                  //Cidade
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "Cidade",
-                      hintText: "Cidade",
-                    ),
-                  ),
-                  //Estado (UF)
                   Row(
                     children: <Widget>[
                       Expanded(
@@ -88,7 +80,7 @@ class _CadChacaraState extends State<CadChacara> {
                       Expanded(
                         child: TextField(
                           keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
+                          TextInputType.numberWithOptions(decimal: true),
                           decoration: InputDecoration(
                             labelText: "CEP",
                             hintText: "00000-000",
@@ -98,6 +90,15 @@ class _CadChacaraState extends State<CadChacara> {
                       //CEP
                     ],
                   ),
+                  //Cidade
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: "Cidade",
+                      hintText: "Cidade",
+                    ),
+                  ),
+                  //Estado (UF)
+
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Row(

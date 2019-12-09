@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/drawer.dart';
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 class home extends StatefulWidget {
   home({Key key}) : super(key: key);
@@ -8,33 +10,59 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
+  String dropdownValueCidade;
+  String dropdownValuePreco ;
 
-  String dropdownValue;
-  String dropdownValue2;
+  Future<Map> _getFotos() async {
+    http.Response response;
+    if (dropdownValueCidade == null &&  dropdownValuePreco == null ) {
+      print("deu certo");
+      response = await http.get(
+          "http://helpfestas.gearhostpreview.com/listar.php?tabela=chacara");
+    } else {
+      print(dropdownValueCidade);
+      print("erro home");
+//      response = await http.get(
+//          " ");
+    }
+    print(response.body);
+    return json
+        .decode(response.body); //json é um Map e como é async utiliza o Future
+  }
 
   @override
-
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.deepOrange[400]),
-          title: Text("Home",style: TextStyle(color: Colors.deepOrangeAccent[400]),),
+          iconTheme: IconThemeData(color: Colors.green[800]),
+          title: Text(
+            "Bem-vindo ao HelpFestas!",
+            style: TextStyle(color: Colors.deepOrange[400]),
+          ),
           centerTitle: true,
           backgroundColor: Colors.white,
           bottom: TabBar(
             indicatorColor: Colors.deepOrange[400],
             tabs: <Widget>[
               Tab(
-                child: Text("Chácara", style: TextStyle(color: Colors.deepOrange[400]),),
+                child: Text(
+                  "Chácara",
+                  style: TextStyle(color: Colors.green[800], fontSize: 16.0),
+                ),
               ),
               Tab(
-                child: Text("2", style: TextStyle(color: Colors.deepOrange[400]),),
+                child: Text(
+                  "Decoração",
+                  style: TextStyle(color: Colors.green[800], fontSize: 16.0),
+                ),
               ),
               Tab(
-                child: Text("3", style: TextStyle(color: Colors.deepOrange[400]),),
+                child: Text(
+                  "Alimentação",
+                  style: TextStyle(color: Colors.green[800], fontSize: 16.0),
+                ),
               ),
             ],
           ),
@@ -43,148 +71,194 @@ class _homeState extends State<home> {
         body: TabBarView(
           children: <Widget>[
             //SingleChildScrollView(
-                //child:
-        Padding(
-                  padding: const EdgeInsets.all(15.0),
-                  child: Column(
-                    //crossAxisAlignment: CrossAxisAlignment.start,
+            //child:
+            Padding(
+              padding: const EdgeInsets.all(15.0),
+              child: Column(
+                //crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Row(
                     children: <Widget>[
-                           Row(
-                            children: <Widget>[
-                              Text("Cidade:  "),
-                              DropdownButton<String>(
-                                value: dropdownValue,
-                                iconSize: 24,
-                                elevation: 16,
-                                underline: Container(
-                                  height: 2,
-                                  color: Colors.deepOrange[400],
-                                ),
-                                onChanged: (String newValue) {
-                                  setState(() {
-                                    dropdownValue = newValue;
-                                  });
-                                },
-                                items: <String>['São João da Boa Vista', 'Águas da Prata', 'Campinas', 'São Paulo']
-                                    .map<DropdownMenuItem<String>>((String value) {
-                                  return DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(value),
-                                  );
-                                })
-                                    .toList(),
-                              ),
-                            ],
-                          ),
-
-                        Row(
-                          children: <Widget>[
-                            Text("Preço:  "),
-                            DropdownButton<String>(
-                              value: dropdownValue2,
-                              iconSize: 24,
-                              elevation: 16,
-                              underline: Container(
-                                height: 2,
-                                color: Colors.deepOrange[400],
-                              ),
-                              onChanged: (String newValue) {
-                                setState(() {
-                                  dropdownValue2 = newValue;
-                                });
-                              },
-                              items: <String>['Menos de 250 R\$', 'De 250 à 500 R\$', 'De 500 à 750 R\$', 'De 750 à 1000','Mais de 1000']
-                                  .map<DropdownMenuItem<String>>((String value) {
-                                return DropdownMenuItem<String>(
-                                  value: value,
-                                  child: Text(value),
-                                );
-                              })
-                                  .toList(),
-                            ),
-                          ],
-                        ),
-                      Container(
-                        child: RaisedButton(
-
-                          padding: EdgeInsets.symmetric(horizontal: 30),
-                          onPressed: () {
-                          },
-                          color: Colors.deepOrange[400],
-                          child: Text("Procurar",
-                              style: TextStyle(color: Colors.white)),
-                        ),
+                      Text(
+                        "Cidade:  ",
+                        style: TextStyle(fontSize: 15.0),
                       ),
-                        Divider(
-                          color: Colors.black,
-                          height: 2,
+                      DropdownButton<String>(
+                        value: dropdownValueCidade,
+                        iconSize: 24,
+                        elevation: 16,
+                        underline: Container(
+                          height: 1.4,
+                          color: Colors.deepOrange[400],
                         ),
-                        Expanded(child:
-                        GridView.builder(
-                          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 10.0,
-                            mainAxisSpacing: 10.0,
-                          ),
-                          itemCount: 8,
-                          itemBuilder: (context, index){
-                            return Container(
-                                child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
-                                  child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: <Widget>[
-                                      Container(
-                                        child: Icon(
-                                            Icons.image,
-                                            size: 75,
-                                        ),
-                                        height: 110,
-                                        width: 175,
-                                        decoration: BoxDecoration(
-                                          color: Colors.grey[400],
-                                        ),
-
-                                      ),
-
-                                      Text("Nome Chacara",style: TextStyle(fontSize: 15,fontWeight: FontWeight.bold)),
-                                      Text("São João da Boa Vista",style: TextStyle(fontSize: 13)),
-                                      Row(
-                                        children: <Widget>[
-                                          Text("300 R\$/D",style: TextStyle(fontSize: 13)),
-                                          Padding(
-                                            padding: const EdgeInsets.only(left: 65),
-                                            child: Icon(
-                                              Icons.star,
-                                              color: Colors.yellow[700],
-                                            ),
-                                          ),
-                                          Text("4.0"),
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                            );
-
-                          }),
-                        ),
-
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValueCidade = newValue;
+                          });
+                        },
+                        items: <String>[
+                          ' ',
+                          'São João da Boa Vista',
+                          'Poços de Caldas',
+                          'Águas da Prata',
+                          'Espírito Santo do Pinhal',
+                          'Vargem Grande do Sul'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
                     ],
-
                   ),
-                ),
+                  Row(
+                    children: <Widget>[
+                      Text(
+                        "Preço:  ",
+                        style: TextStyle(fontSize: 15.0),
+                      ),
+                      DropdownButton<String>(
+                        value: dropdownValuePreco,
+                        iconSize: 24,
+                        elevation: 16,
+                        underline: Container(
+                          height: 1.4,
+                          color: Colors.deepOrange[400],
+                        ),
+                        onChanged: (String newValue) {
+                          setState(() {
+                            dropdownValuePreco = newValue;
+                          });
+                        },
+                        items: <String>[
+                          ' ',
+                          'Menos de R\$250',
+                          'De R\$250 à 500 ',
+                          'De R\$500 à 750 ',
+                          'De R\$750 à 1000',
+                          'Mais de R\$1000'
+                        ].map<DropdownMenuItem<String>>((String value) {
+                          return DropdownMenuItem<String>(
+                            value: value,
+                            child: Text(value),
+                          );
+                        }).toList(),
+                      ),
+                    ],
+                  ),
+
+                  //Possibilidade de colocar filtro por data
+
+                  Container(
+                    child: RaisedButton(
+                        padding: EdgeInsets.symmetric(horizontal: 30),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(30.0)),
+                        onPressed: () {},
+                        color: Colors.deepOrange[400],
+                        child: Icon(
+                          Icons.search,
+                          color: Colors.white,
+                        )
+//                      Text("Procurar",
+//                          style: TextStyle(color: Colors.white)),
+                        ),
+                  ),
+                  Divider(
+                    color: Colors.black,
+                    height: 2,
+                  ),
+                  Expanded(
+                      child: FutureBuilder(
+                    future: _getFotos(),
+                    builder: (context, snapshot) {
+                      switch (snapshot.connectionState) {
+                        case ConnectionState.waiting:
+                        case ConnectionState.none:
+                          return Container(
+                            width: 200,
+                            height: 200,
+                            alignment: Alignment.center,
+                            child: CircularProgressIndicator(
+                              valueColor:
+                                  AlwaysStoppedAnimation<Color>(Colors.white),
+                              strokeWidth: 5,
+                            ),
+                          );
+                        default:
+                          if (snapshot.hasError) {
+                            return Container();
+                          } else {
+                            return _GridChacaraHome(context, snapshot);
+                          }
+                      }
+                    },
+                  )),
+                ],
+              ),
+            ),
             //),
-            Container(
-
-            ),
-            Container(
-
-            ),
+            Container(),
+            Container(),
           ],
         ),
       ),
     );
   }
 
+  Widget _GridChacaraHome(BuildContext context, AsyncSnapshot snapshot) {
+    return GridView.builder(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 10.0,
+          mainAxisSpacing: 10.0,
+        ),
+        itemCount: snapshot.data["chacara"].length,
+        itemBuilder: (context, index) {
+          return GestureDetector(
+            onTap: () {},
+            child: Container(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    Container(
+                      child: Icon(
+                        Icons.image,
+                        size: 75,
+                      ),
+                      height: 110,
+                      width: 175,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[400],
+                      ),
+                    ),
+                    Text("Nome Chacara",
+                        style: TextStyle(
+                            fontSize: 15, fontWeight: FontWeight.bold)),
+                    Text("São João da Boa Vista",
+                        style: TextStyle(fontSize: 13)),
+                    Row(
+                      children: <Widget>[
+                        Text("300 R\$/D", style: TextStyle(fontSize: 15)),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 65),
+                          child: Icon(
+                            Icons.star,
+                            color: Colors.yellow[700],
+                            size: 20,
+                          ),
+                        ),
+                        Text("4.0"),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          );
+        });
+  }
 }
