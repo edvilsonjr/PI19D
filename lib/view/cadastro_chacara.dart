@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:pi/view/pagina_chacara.dart';
-
 import 'comodidades.dart';
 import 'comodidades_p2.dart';
 import 'diarias.dart';

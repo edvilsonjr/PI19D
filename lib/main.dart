@@ -3,9 +3,14 @@ import 'package:pi/view/cadastro_chacara.dart';
 import 'package:pi/view/tela_login.dart';
 import 'package:pi/view/cadastro.dart';
 import 'package:pi/view/home.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'model/pessoa_model.dart';
 
 void main() async{
-  runApp(App());
+  runApp(ScopedModel(
+      model: PessoaModel(),
+      child: App(),
+  ));
 }
 
 class App extends StatelessWidget {

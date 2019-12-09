@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class PageDrawer extends StatelessWidget {
   @override
@@ -7,8 +8,8 @@ class PageDrawer extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountEmail: Text("Edvilson2000@gmail.com", style: TextStyle(color: Colors.black),),
-              accountName: Text("Edvilson Dos Santos", style: TextStyle(color: Colors.black),),
+              accountEmail: Text(PessoaModel.of(context).email, style: TextStyle(color: Colors.black),),
+              accountName: Text(PessoaModel.of(context).nome, style: TextStyle(color: Colors.black),),
               currentAccountPicture: Icon(Icons.person, size: 50,),
               decoration: BoxDecoration(
                 color: Colors.green[100],
@@ -26,12 +27,14 @@ class PageDrawer extends StatelessWidget {
               onTap: () {
                 Navigator.of(context).pushNamed('/CadChacara');
               },
+              trailing: Icon(Icons.arrow_forward_ios) ,
             ),
             ListTile(
               title: Text('Desconectar', style: TextStyle(fontSize: 20)),
               onTap: () {
                 Navigator.of(context).pushNamed('/TelaLogin');
               },
+              trailing: Icon(Icons.arrow_forward_ios) ,
             ),
           ],
         ),

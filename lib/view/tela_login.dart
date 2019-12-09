@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
+import 'package:scoped_model/scoped_model.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -7,6 +9,10 @@ class TelaLogin extends StatefulWidget {
 }
 
 class _TelaLoginState extends State<TelaLogin> {
+
+  String _email;
+  String _senha;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,11 +50,21 @@ class _TelaLoginState extends State<TelaLogin> {
                       TextField(
                         decoration: InputDecoration(hintText: "Email"),
                         keyboardType: TextInputType.emailAddress,
+                        onChanged: (texto){
+                          setState(() {
+                            _email = texto;
+                          });
+                        },
                       ),
                       TextField(
                         decoration: InputDecoration(
                           hintText: "Senha",
                         ),
+                        onChanged: (texto){
+                          setState(() {
+                            _senha = texto;
+                          });
+                        },
                         obscureText: true,
                       ),
                       Padding(
@@ -83,7 +99,9 @@ class _TelaLoginState extends State<TelaLogin> {
                                         ),
                                         actions: <Widget>[
                                           FlatButton(
-                                              onPressed: () {},
+                                              onPressed: () {
+                                                PessoaModel.of(context).nome.toString();
+                                              },
                                               child: Text(
                                                 "Enviar",
                                                 style: TextStyle(
