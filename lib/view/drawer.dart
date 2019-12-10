@@ -8,8 +8,8 @@ class PageDrawer extends StatelessWidget {
         child: ListView(
           children: <Widget>[
             UserAccountsDrawerHeader(
-              accountEmail: Text(PessoaModel.of(context).email, style: TextStyle(color: Colors.black),),
-              accountName: Text(PessoaModel.of(context).nome, style: TextStyle(color: Colors.black),),
+              accountEmail: Text(PessoaModel.of(context).email ?? "", style: TextStyle(color: Colors.black),),
+              accountName: Text(PessoaModel.of(context).nome ?? "", style: TextStyle(color: Colors.black),),
               currentAccountPicture: Icon(Icons.person, size: 50,),
               decoration: BoxDecoration(
                 color: Colors.green[100],

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_auth_buttons/flutter_auth_buttons.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:pi/model/pessoa_model.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class TelaLogin extends StatefulWidget {
   @override
@@ -13,9 +14,12 @@ class _TelaLoginState extends State<TelaLogin> {
   String _email;
   String _senha;
 
+  final _scaffoldkey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldkey,
       backgroundColor: Colors.green[100],
       body: SingleChildScrollView(
         child: Column(
@@ -122,7 +126,19 @@ class _TelaLoginState extends State<TelaLogin> {
                         padding: const EdgeInsets.all(10),
                         child: RaisedButton(
                           onPressed: () {
-                            Navigator.of(context).pushNamed('/Home');
+                            FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _senha).then((user){
+                              print("Deu Certo o login");
+                              Navigator.of(context).pushReplacementNamed("/Home");
+                            }).catchError((e){
+                              print("Erro Login");
+                              _scaffoldkey.currentState.showSnackBar(
+                                  SnackBar(
+                                    content: Text("Login ou Senha Invalidos"),
+                                    backgroundColor: Colors.red,
+                                    duration: Duration(seconds: 3),
+                                  )
+                              );
+                            });
                           },
                           padding: EdgeInsets.symmetric(horizontal: 98),
                           color: Colors.deepOrange[400],
