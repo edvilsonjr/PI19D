@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pi/view/pagina_galeria_chacara.dart';
-
+import 'package:http/http.dart' as http;
 import 'calendario.dart';
-import 'drawer.dart';
 
 class ChacaraHome extends StatefulWidget {
+  dynamic dadoschacara;
 
+ChacaraHome(this.dadoschacara);
 
   @override
   _ChacaraHomeState createState() => _ChacaraHomeState();
@@ -28,7 +29,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.deepOrange),
       ),
-      drawer: PageDrawer(),
+      //drawer: PageDrawer(),
       body: SingleChildScrollView(
         child: Column(
           //crossAxisAlignment: CrossAxisAlignment.center,
@@ -37,7 +38,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
 //                child: widget.CapaPrincipal[0] == null
 //                    ? Icon(Icons.photo)
 //                    : Image.network(widget.CapaPrincipal[0])),
-        child: Icon(Icons.photo)),
+                child: Icon(Icons.photo)),
             Divider(
               color: Colors.black,
               height: 2.0,
@@ -51,7 +52,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                   child: Text(
                     "Chácara A",
                     style:
-                    TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
                   ),
                 ),
                 Padding(
@@ -87,7 +88,6 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                     ],
                   ),
                 ),
-
                 Expanded(
                   child: IconButton(
                     onPressed: () {
@@ -150,7 +150,6 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                 ],
               ),
             ),
-
             Divider(
               color: Colors.black,
               height: 20.0,
@@ -346,16 +345,16 @@ class _ChacaraHomeState extends State<ChacaraHome> {
             /*---------------------------------------------------------------------------*/
             RaisedButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PaginaGaleria()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PaginaGaleria()));
               },
               color: Colors.deepOrange[400],
               child: Text(
                 "Galeria",
-                style:
-                TextStyle(fontWeight: FontWeight.bold, color: Colors.white,fontSize: 17.0),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 17.0),
               ),
             ),
           ],
@@ -363,6 +362,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
       ),
     );
   }
+
   Widget Estimativa() {
     return Column(
       children: <Widget>[
@@ -419,5 +419,4 @@ class _ChacaraHomeState extends State<ChacaraHome> {
       ],
     );
   }
-
 }

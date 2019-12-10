@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:pi/view/drawer.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'chacara_home.dart';
 
 class home extends StatefulWidget {
   home({Key key}) : super(key: key);
@@ -10,20 +11,37 @@ class home extends StatefulWidget {
 }
 
 class _homeState extends State<home> {
-  String dropdownValueCidade;
-  String dropdownValuePreco ;
+  String dropdownValueCidade; //controller do filtro cidade
+  String dropdownValuePreco; //controller do filtro preço
 
+  int qtdchacara = 0;
+
+  //caminho para selecionar as chácaras e montar o grid
   Future<Map> _getFotos() async {
     http.Response response;
-    if (dropdownValueCidade == null &&  dropdownValuePreco == null ) {
+    if ((dropdownValueCidade == null || dropdownValueCidade == " ") &&
+        (dropdownValuePreco == null || dropdownValuePreco == " ")) {
       print("deu certo");
       response = await http.get(
+          //quando não há seleção de filtro
           "http://helpfestas.gearhostpreview.com/listar.php?tabela=chacara");
     } else {
-      print(dropdownValueCidade);
-      print("erro home");
-//      response = await http.get(
-//          " ");
+      if (dropdownValueCidade != null &&
+          (dropdownValuePreco == null || dropdownValuePreco == " ")) {
+        //quando selecionado apenas o filtro cidade
+        print("filtro cidade");
+        response = await http.get(
+            "http://helpfestas.gearhostpreview.com/listar_filtro.php?tabela=chacara&colTabela=cidade&cidade=$dropdownValueCidade");
+      } else if (dropdownValuePreco != null &&
+          (dropdownValueCidade == null || dropdownValueCidade == " ")) {
+        //quando selecionado apenas o filtro preço
+        print("filtro preço");
+//        response = await http.get(
+//            "http://helpfestas.gearhostpreview.com/listar.php?tabela=chacara&colTabela=preco");
+      } else {
+        //quando selecionado o filtro cidade e preço
+        print("ambos os filtros");
+      }
     }
     print(response.body);
     return json
@@ -70,12 +88,10 @@ class _homeState extends State<home> {
         drawer: PageDrawer(),
         body: TabBarView(
           children: <Widget>[
-            //SingleChildScrollView(
-            //child:
             Padding(
               padding: const EdgeInsets.all(15.0),
               child: Column(
-                //crossAxisAlignment: CrossAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Row(
                     children: <Widget>[
@@ -98,7 +114,8 @@ class _homeState extends State<home> {
                         },
                         items: <String>[
                           ' ',
-                          'São João da Boa Vista',
+                          'Sao Joao da Boa Vista',
+                          'Aguai',
                           'Poços de Caldas',
                           'Águas da Prata',
                           'Espírito Santo do Pinhal',
@@ -150,21 +167,22 @@ class _homeState extends State<home> {
 
                   //Possibilidade de colocar filtro por data
 
-                  Container(
-                    child: RaisedButton(
-                        padding: EdgeInsets.symmetric(horizontal: 30),
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(30.0)),
-                        onPressed: () {},
-                        color: Colors.deepOrange[400],
-                        child: Icon(
-                          Icons.search,
-                          color: Colors.white,
-                        )
-//                      Text("Procurar",
-//                          style: TextStyle(color: Colors.white)),
-                        ),
-                  ),
+//                  Container(
+//                    child: RaisedButton(
+//                        padding: EdgeInsets.symmetric(horizontal: 30),
+//                        shape: RoundedRectangleBorder(
+//                            borderRadius: BorderRadius.circular(30.0)),
+//                        onPressed: () {},
+//                        color: Colors.deepOrange[400],
+//                        child: Icon(
+//                          Icons.search,
+//                          color: Colors.white,
+//                        )
+////                      Text("Procurar",
+////                          style: TextStyle(color: Colors.white)),
+//                        ),
+//                  ),
+
                   Divider(
                     color: Colors.black,
                     height: 2,
@@ -217,7 +235,13 @@ class _homeState extends State<home> {
         itemCount: snapshot.data["chacara"].length,
         itemBuilder: (context, index) {
           return GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) =>
+                          ChacaraHome(snapshot.data["chacara"][index])));
+            },
             child: Container(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -235,14 +259,14 @@ class _homeState extends State<home> {
                         color: Colors.grey[400],
                       ),
                     ),
-                    Text("Nome Chacara",
+                    Text(snapshot.data["chacara"][index]["nome"].toString(),
                         style: TextStyle(
                             fontSize: 15, fontWeight: FontWeight.bold)),
-                    Text("São João da Boa Vista",
+                    Text(snapshot.data["chacara"][index]["cidade"].toString(),
                         style: TextStyle(fontSize: 13)),
                     Row(
                       children: <Widget>[
-                        Text("300 R\$/D", style: TextStyle(fontSize: 15)),
+                        Text("300 R\$", style: TextStyle(fontSize: 15)),
                         Padding(
                           padding: const EdgeInsets.only(left: 65),
                           child: Icon(

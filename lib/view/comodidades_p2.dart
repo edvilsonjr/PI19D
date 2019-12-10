@@ -16,6 +16,7 @@ class _PessoaMesaState extends State<PessoaMesa> {
 
   TextEditingController pessoa = TextEditingController();
   TextEditingController mesa = TextEditingController();
+  TextEditingController comentario = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +32,7 @@ class _PessoaMesaState extends State<PessoaMesa> {
           ),
         ),
         backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.deepOrange[400]),
       ),
       body: SingleChildScrollView(
         child: Column(
@@ -49,9 +51,6 @@ class _PessoaMesaState extends State<PessoaMesa> {
                 controller: pessoa,
                 keyboardType:
                 TextInputType.numberWithOptions(decimal: true),
-                //decoration: InputDecoration(
-                  //hintText: "Pessoas",
-                //),
               ),
             ),
             Padding(
@@ -118,18 +117,31 @@ class _PessoaMesaState extends State<PessoaMesa> {
                   Expanded(
                     child: Padding(
                       padding: const EdgeInsets.only(left: 15.0),
-                      child: Text(""), /*TextField(
-                        enabled: qtdmesas,
-                        controller: mesa,
-                        keyboardType:
-                        TextInputType.numberWithOptions(decimal: true),
-                        decoration: InputDecoration(
-                          hintText: "Para 4 lugares",
-                        ),
-                      ),*/
+                      child: Text(""),
                     ),
                   ),
                 ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Divider(
+                color: Colors.black,
+                height: 2.0,
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 5.0, top: 8.0),
+              child: Row(
+                children: <Widget>[
+                  Text("Outras informações sobre a chácara: ", style: TextStyle(fontSize: 19.0, fontWeight: FontWeight.bold),),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.only(left: 8.0, right: 8.0),
+              child: TextField(
+                controller: comentario,
               ),
             ),
             Padding(

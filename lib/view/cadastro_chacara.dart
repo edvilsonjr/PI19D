@@ -12,6 +12,8 @@ class CadChacara extends StatefulWidget {
 
 class _CadChacaraState extends State<CadChacara> {
   PageController page = PageController();
+  String valueCidade;
+  String valueEstado;
 
   @override
   Widget build(BuildContext context) {
@@ -31,6 +33,7 @@ class _CadChacaraState extends State<CadChacara> {
               ),
             ),
             backgroundColor: Colors.white,
+            iconTheme: IconThemeData(color: Colors.deepOrange[400]),
           ),
           body: SingleChildScrollView(
             child: Padding(
@@ -41,7 +44,8 @@ class _CadChacaraState extends State<CadChacara> {
                   TextField(
                     decoration: InputDecoration(
                       //labelText: "Nome da Chácara",
-                      hintText: "Nome da Chácara",
+                      labelText: "Nome da Chácara",
+                      labelStyle: TextStyle(color: Colors.green[800])
                     ),
                   ),
                   Row(
@@ -50,54 +54,94 @@ class _CadChacaraState extends State<CadChacara> {
                         child: /*Endereço*/ TextField(
                           decoration: InputDecoration(
                             labelText: "Endereço",
+                            labelStyle: TextStyle(color: Colors.green[800]),
                             hintText: "Rua, Avenida",
                           ),
                         ),
                       ),
-                      Expanded(
-                        child: /*Número*/ TextField(
-                          keyboardType:
-                              TextInputType.numberWithOptions(decimal: true),
-                          decoration: InputDecoration(
-                            labelText: "Número",
-                            //hintText: "Número",
-                          ),
-                        ),
-                      )
                     ],
                   ),
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: TextField(
-                          decoration: InputDecoration(
-                            labelText: "Estado - UF",
-                            hintText: "SP, MG,PR..",
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        child: TextField(
+                        child: /*Número*/ TextField(
                           keyboardType:
                           TextInputType.numberWithOptions(decimal: true),
                           decoration: InputDecoration(
-                            labelText: "CEP",
-                            hintText: "00000-000",
+                            labelText: "Número",
+                              labelStyle: TextStyle(color: Colors.green[800])
                           ),
                         ),
                       ),
-                      //CEP
+                      Text("Estado: ", style: TextStyle(fontSize: 17.0, color: Colors.green[800]),),
+
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: DropdownButton<String>(
+                          value: valueEstado,
+                          iconSize: 24,
+                          elevation: 16,
+                          underline: Container(
+                            height: 1.4,
+                            color: Colors.deepOrange[400],
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              valueEstado = newValue;
+                            });
+                          },
+                          items: <String>[
+                            'MG',
+                            'SP'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
                     ],
                   ),
-                  //Cidade
-                  TextField(
-                    decoration: InputDecoration(
-                      labelText: "Cidade",
-                      hintText: "Cidade",
-                    ),
-                  ),
-                  //Estado (UF)
+                  Row(
+                    children: <Widget>[
 
+                      Text("Cidade: ", style: TextStyle(fontSize: 17.0, color: Colors.green[800]),),
+
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: DropdownButton<String>(
+                            value: valueCidade,
+                            iconSize: 24,
+                            elevation: 16,
+                            underline: Container(
+                              height: 1.4,
+                              color: Colors.deepOrange[400],
+                            ),
+                            onChanged: (String newValue) {
+                              setState(() {
+                                valueCidade = newValue;
+                              });
+                            },
+                            items: <String>[
+                              'São João da Boa Vista',
+                              'Aguaí',
+                              'Poços de Caldas',
+                              'Águas da Prata',
+                              'Espírito Santo do Pinhal',
+                              'Vargem Grande do Sul'
+                            ].map<DropdownMenuItem<String>>((String value) {
+                              return DropdownMenuItem<String>(
+                                value: value,
+                                child: Text(value),
+                              );
+                            }).toList(),
+                          ),
+                        ),
+
+
+                    ],
+                  ),
                   Padding(
                     padding: const EdgeInsets.only(right: 8.0),
                     child: Row(
@@ -128,7 +172,7 @@ class _CadChacaraState extends State<CadChacara> {
         Diarias(context, page),
         Comodidade(context, page),
         PessoaMesa(context, page),
-        Galeria(context,page),
+        Galeria(context, page),
       ],
     );
   }

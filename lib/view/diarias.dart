@@ -48,7 +48,8 @@ class _DiariasState extends State<Diarias> {
             fontWeight: FontWeight.bold,
           ),
         ),
-        backgroundColor: Colors.green[100],
+        backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.deepOrange[400]),
       ),
       body: SingleChildScrollView(
         child: Column(

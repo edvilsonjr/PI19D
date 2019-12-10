@@ -49,6 +49,7 @@ class _ComodidadeState extends State<Comodidade> {
           ),
         ),
         backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.deepOrange[400]),
       ),
       body: SingleChildScrollView(
         child: Column(
