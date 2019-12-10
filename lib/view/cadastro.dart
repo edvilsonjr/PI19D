@@ -117,7 +117,7 @@ class _CadastroState extends State<Cadastro> {
                     if(email.text == null || email.text == "" || senha.text == null || senha.text == "" || nome.text == null || nome.text == ""){
                       _scaffoldkey.currentState.showSnackBar(
                           SnackBar(
-                            content: Text("Dados Obrigatórios não Prenchidos"),
+                            content: Text("Dados Obrigatórios Não Prenchidos"),
                             backgroundColor: Colors.red,
                             duration: Duration(seconds: 3),
                           )
