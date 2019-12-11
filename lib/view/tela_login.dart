@@ -14,6 +14,8 @@ class _TelaLoginState extends State<TelaLogin> {
   String _email;
   String _senha;
 
+  TextEditingController _recuemail = new TextEditingController();
+
   final _scaffoldkey = GlobalKey<ScaffoldState>();
 
   @override
@@ -98,6 +100,7 @@ class _TelaLoginState extends State<TelaLogin> {
                                             TextField(
                                               decoration: InputDecoration(
                                                   hintText: "E-mail"),
+                                                  controller: _recuemail,
                                             ),
                                           ],
                                         ),
@@ -105,6 +108,7 @@ class _TelaLoginState extends State<TelaLogin> {
                                           FlatButton(
                                               onPressed: () {
                                                 PessoaModel.of(context).nome.toString();
+                                                FirebaseAuth.instance.sendPasswordResetEmail(email: _recuemail.text);
                                               },
                                               child: Text(
                                                 "Enviar",
@@ -128,6 +132,8 @@ class _TelaLoginState extends State<TelaLogin> {
                           onPressed: () {
                             FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _senha).then((user){
                               print("Deu Certo o login");
+                              PessoaModel.of(context).uid = user.uid;
+                              PessoaModel.of(context).LogarSistema();
                               Navigator.of(context).pushReplacementNamed("/Home");
                             }).catchError((e){
                               print("Erro Login");

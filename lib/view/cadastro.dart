@@ -138,12 +138,16 @@ class _CadastroState extends State<Cadastro> {
                           email: email.text,
                           password: senha.text
                       )
-                          .then((user) {
+                          .then((user) async {
                         print("Deu Certo o Cadastro");
+
+                        await user.sendEmailVerification();
 
                         PessoaModel
                             .of(context)
                             .uid = user.uid;
+
+
 
                         PessoaModel.of(context).Cadastro();
 
