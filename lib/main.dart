@@ -17,7 +17,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: TelaLogin(),
+      home: home(),
       debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
           '/TelaLogin': (BuildContext context) => TelaLogin(),

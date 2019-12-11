@@ -15,50 +15,60 @@ class _GaleriaState extends State<Galeria> {
   bool teste = false;
   Map<int, dynamic> Fotos = Map();
 
+  /*---------------------------voltar a pagina--------------------------------*/
+  Future<bool> jumpPagina() async {
+    widget.page.jumpToPage(3);
+    return false;
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        centerTitle: true,
-        title: Text(
-          "Cadastro da Chácara",
-          style: TextStyle(
-            fontSize: 23,
-            color: Colors.deepOrange[400],
-            fontWeight: FontWeight.bold,
+    return WillPopScope(
+      onWillPop: jumpPagina,
+      child: Scaffold(
+        appBar: AppBar(
+          centerTitle: true,
+          iconTheme: IconThemeData(color: Colors.deepOrange[400]),
+          title: Text(
+            "Cadastro da Chácara",
+            style: TextStyle(
+              fontSize: 21,
+              color: Colors.deepOrange[400],
+              fontWeight: FontWeight.bold,
+            ),
           ),
+          backgroundColor: Colors.white,
         ),
-        backgroundColor: Colors.white,
-      ),
-      body: Column(
-        children: <Widget>[
-          Padding(
-            padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
-            child: Text(
-              "Adicione até 6 fotos da chácara:",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+        body: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0, bottom: 8.0),
+              child: Text(
+                "Adicione até 6 fotos da chácara:",
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+              ),
             ),
-          ),
-          Expanded(
-            child: GaleriaImagem(context),
-          ),
-          RaisedButton(
-            onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => PaginaChacara(context, Fotos)));
-            },
-            color: Colors.green[300],
-            child: Text(
-              "Finalizar",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
-                  fontSize: 18.0),
+            Expanded(
+              child: GaleriaImagem(context),
             ),
-          )
-        ],
+            RaisedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => PaginaChacara(context, Fotos)));
+              },
+              color: Colors.green[300],
+              child: Text(
+                "Finalizar",
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 18.0),
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

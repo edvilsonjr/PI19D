@@ -7,14 +7,15 @@ import 'calendario.dart';
 class ChacaraHome extends StatefulWidget {
   dynamic dadoschacara;
 
-ChacaraHome(this.dadoschacara);
+  ChacaraHome(this.dadoschacara);
 
   @override
   _ChacaraHomeState createState() => _ChacaraHomeState();
 }
 
 class _ChacaraHomeState extends State<ChacaraHome> {
-  bool teste = false;
+  bool estimativa = true;
+  bool observacao = true;
   Map<int, dynamic> Fotos = Map();
 
   @override
@@ -89,14 +90,17 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                   ),
                 ),
                 Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Calendario()));
-                    },
-                    icon: Icon(FontAwesomeIcons.calendarAlt),
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 140.0),
+                    child: IconButton(
+                      onPressed: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Calendario()));
+                      },
+                      icon: Icon(FontAwesomeIcons.calendarAlt),
+                    ),
                   ),
                 ),
               ],
@@ -341,8 +345,11 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                 height: 20.0,
               ),
             ),
-            teste ? Estimativa() : Text(""),
+            estimativa ? Estimativa() : Text(""),
             /*---------------------------------------------------------------------------*/
+            /*-------------------------infos adicionais-----------------------------*/
+            observacao ? Observacao() : Text(""),
+            /*-----------------------------------------------------------------------*/
             RaisedButton(
               onPressed: () {
                 Navigator.push(context,
@@ -416,7 +423,36 @@ class _ChacaraHomeState extends State<ChacaraHome> {
             ],
           ),
         ),
+        Padding(
+          padding: const EdgeInsets.only(top: 8.0),
+          child: Divider(
+            color: Colors.black,
+            height: 20.0,
+          ),
+        ),
       ],
     );
   }
+}
+
+Widget Observacao() {
+  return Column(
+    children: <Widget>[
+      Text(
+        "Informações adicionais: ",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+        child: Row(
+          children: <Widget>[
+            Flexible(
+              child: Text(
+                  "Local confortável, fácil acesso, permitido som até as 22 horas. Faça sua festa aqui!"),
+            ),
+          ],
+        ),
+      ),
+    ],
+  );
 }

@@ -16,12 +16,13 @@ class _PaginaGaleriaState extends State<PaginaGaleria> {
         title: Text(
           "Galeria",
           style: TextStyle(
-            fontSize: 23,
+            fontSize: 21,
             color: Colors.deepOrange[400],
             fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.deepOrange[400]),
       ),
       body: Column(
         children: <Widget>[

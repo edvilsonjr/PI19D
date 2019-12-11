@@ -54,7 +54,7 @@ class _homeState extends State<home> {
       length: 3,
       child: Scaffold(
         appBar: AppBar(
-          iconTheme: IconThemeData(color: Colors.green[800]),
+          iconTheme: IconThemeData(color: Colors.black38),
           title: Text(
             "Bem-vindo ao HelpFestas!",
             style: TextStyle(color: Colors.deepOrange[400]),
@@ -62,24 +62,24 @@ class _homeState extends State<home> {
           centerTitle: true,
           backgroundColor: Colors.white,
           bottom: TabBar(
-            indicatorColor: Colors.deepOrange[400],
+            indicatorColor: Colors.green[200],
             tabs: <Widget>[
               Tab(
                 child: Text(
                   "Chácara",
-                  style: TextStyle(color: Colors.green[800], fontSize: 16.0),
+                  style: TextStyle(color: Colors.grey[850], fontSize: 18.0),
                 ),
               ),
               Tab(
                 child: Text(
                   "Decoração",
-                  style: TextStyle(color: Colors.green[800], fontSize: 16.0),
+                  style: TextStyle(color: Colors.grey[850], fontSize: 18.0),
                 ),
               ),
               Tab(
                 child: Text(
                   "Alimentação",
-                  style: TextStyle(color: Colors.green[800], fontSize: 16.0),
+                  style: TextStyle(color: Colors.grey[850], fontSize: 18.0),
                 ),
               ),
             ],
@@ -89,15 +89,17 @@ class _homeState extends State<home> {
         body: TabBarView(
           children: <Widget>[
             Padding(
-              padding: const EdgeInsets.all(15.0),
+              padding: const EdgeInsets.only(top: 8.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Row(
                     children: <Widget>[
-                      Text(
-                        "Cidade:  ",
-                        style: TextStyle(fontSize: 15.0),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 70.0),
+                        child: Text(
+                          "Cidade:  ",
+                          style: TextStyle(fontSize: 16.0),
+                        ),
                       ),
                       DropdownButton<String>(
                         value: dropdownValueCidade,
@@ -114,8 +116,8 @@ class _homeState extends State<home> {
                         },
                         items: <String>[
                           ' ',
-                          'Sao Joao da Boa Vista',
-                          'Aguai',
+                          'São João da Boa Vista',
+                          'Aguaí',
                           'Poços de Caldas',
                           'Águas da Prata',
                           'Espírito Santo do Pinhal',
@@ -131,9 +133,12 @@ class _homeState extends State<home> {
                   ),
                   Row(
                     children: <Widget>[
-                      Text(
-                        "Preço:  ",
-                        style: TextStyle(fontSize: 15.0),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 95.0),
+                        child: Text(
+                          "Preço:  ",
+                          style: TextStyle(fontSize: 16.0),
+                        ),
                       ),
                       DropdownButton<String>(
                         value: dropdownValuePreco,
@@ -166,22 +171,6 @@ class _homeState extends State<home> {
                   ),
 
                   //Possibilidade de colocar filtro por data
-
-//                  Container(
-//                    child: RaisedButton(
-//                        padding: EdgeInsets.symmetric(horizontal: 30),
-//                        shape: RoundedRectangleBorder(
-//                            borderRadius: BorderRadius.circular(30.0)),
-//                        onPressed: () {},
-//                        color: Colors.deepOrange[400],
-//                        child: Icon(
-//                          Icons.search,
-//                          color: Colors.white,
-//                        )
-////                      Text("Procurar",
-////                          style: TextStyle(color: Colors.white)),
-//                        ),
-//                  ),
 
                   Divider(
                     color: Colors.black,
@@ -268,7 +257,7 @@ class _homeState extends State<home> {
                       children: <Widget>[
                         Text("300 R\$", style: TextStyle(fontSize: 15)),
                         Padding(
-                          padding: const EdgeInsets.only(left: 65),
+                          padding: const EdgeInsets.only(left: 75),
                           child: Icon(
                             Icons.star,
                             color: Colors.yellow[700],

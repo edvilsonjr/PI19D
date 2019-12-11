@@ -15,7 +15,8 @@ class PaginaChacara extends StatefulWidget {
 }
 
 class _PaginaChacaraState extends State<PaginaChacara> {
-  bool teste = false;
+  bool estimativa = true;
+  bool observacao = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,10 +25,10 @@ class _PaginaChacaraState extends State<PaginaChacara> {
         centerTitle: true,
         title: Text(
           "Chácara",
-          style: TextStyle(color: Colors.deepOrange[400]),
+          style: TextStyle(color: Colors.deepOrange[400], fontSize: 21),
         ),
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.deepOrange),
+        iconTheme: IconThemeData(color: Colors.black38),
       ),
       drawer: PageDrawer(),
       body: SingleChildScrollView(
@@ -158,7 +159,6 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                 ],
               ),
             ),
-
             Divider(
               color: Colors.black,
               height: 20.0,
@@ -350,20 +350,24 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                 height: 20.0,
               ),
             ),
-            teste ? Estimativa() : Text(""),
+            estimativa ? Estimativa() : Text(""),
             /*---------------------------------------------------------------------------*/
+
+            /*-------------------------infos adicionais-----------------------------*/
+            observacao ? Observacao() : Text(""),
+            /*-----------------------------------------------------------------------*/
             RaisedButton(
               onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => PaginaGaleria()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => PaginaGaleria()));
               },
               color: Colors.deepOrange[400],
               child: Text(
                 "Galeria",
-                style:
-                    TextStyle(fontWeight: FontWeight.bold, color: Colors.white,fontSize: 17.0),
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
+                    fontSize: 17.0),
               ),
             ),
           ],
@@ -423,6 +427,34 @@ Widget Estimativa() {
             ),
             Text("200"),
 //
+          ],
+        ),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(top: 8.0),
+        child: Divider(
+          color: Colors.black,
+          height: 20.0,
+        ),
+      ),
+    ],
+  );
+}
+
+Widget Observacao() {
+  return Column(
+    children: <Widget>[
+      Text(
+        "Informações adicionais: ",
+        style: TextStyle(fontWeight: FontWeight.bold),
+      ),
+      Padding(
+        padding: const EdgeInsets.only(left: 8.0, top: 8.0),
+        child: Row(
+          children: <Widget>[
+            Flexible(
+                child: Text("Local confortável, fácil acesso, permitido som até as 22 horas. Faça sua festa aqui!") ,
+            ),
           ],
         ),
       ),

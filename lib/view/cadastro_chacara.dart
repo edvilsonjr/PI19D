@@ -27,7 +27,7 @@ class _CadChacaraState extends State<CadChacara> {
             title: Text(
               "Cadastro da Chácara",
               style: TextStyle(
-                fontSize: 23,
+                fontSize: 21,
                 color: Colors.deepOrange[400],
                 fontWeight: FontWeight.bold,
               ),
@@ -45,7 +45,7 @@ class _CadChacaraState extends State<CadChacara> {
                     decoration: InputDecoration(
                       //labelText: "Nome da Chácara",
                       labelText: "Nome da Chácara",
-                      labelStyle: TextStyle(color: Colors.green[800])
+                      labelStyle: TextStyle(color: Colors.black)
                     ),
                   ),
                   Row(
@@ -54,7 +54,7 @@ class _CadChacaraState extends State<CadChacara> {
                         child: /*Endereço*/ TextField(
                           decoration: InputDecoration(
                             labelText: "Endereço",
-                            labelStyle: TextStyle(color: Colors.green[800]),
+                           labelStyle: TextStyle(color: Colors.black),
                             hintText: "Rua, Avenida",
                           ),
                         ),
@@ -69,11 +69,11 @@ class _CadChacaraState extends State<CadChacara> {
                           TextInputType.numberWithOptions(decimal: true),
                           decoration: InputDecoration(
                             labelText: "Número",
-                              labelStyle: TextStyle(color: Colors.green[800])
+                             labelStyle: TextStyle(color: Colors.black)
                           ),
                         ),
                       ),
-                      Text("Estado: ", style: TextStyle(fontSize: 17.0, color: Colors.green[800]),),
+                      Text("Estado: ", style: TextStyle(fontSize: 17.0, color: Colors.black),),
 
                       Padding(
                         padding: const EdgeInsets.only(left: 5.0),
@@ -106,7 +106,7 @@ class _CadChacaraState extends State<CadChacara> {
                   Row(
                     children: <Widget>[
 
-                      Text("Cidade: ", style: TextStyle(fontSize: 17.0, color: Colors.green[800]),),
+                      Text("Cidade: ", style: TextStyle(fontSize: 17.0, color: Colors.black),),
 
                         Padding(
                           padding: const EdgeInsets.only(left: 5.0),
