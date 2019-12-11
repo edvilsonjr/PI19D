@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:pi/model/pessoa_model.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_masked_text/flutter_masked_text.dart';
+
 
 class Cadastro extends StatefulWidget {
   @override
@@ -16,11 +18,12 @@ class _CadastroState extends State<Cadastro> {
 
   TextEditingController nome = new TextEditingController();
   TextEditingController sobrenome = new TextEditingController();
-  TextEditingController cpf = new TextEditingController();
   TextEditingController data = new TextEditingController();
-  TextEditingController tel = new TextEditingController();
   TextEditingController email = new TextEditingController();
   TextEditingController senha = new TextEditingController();
+
+  MaskedTextController tel = new MaskedTextController(mask: "(00)00000-0000");
+  MaskedTextController cpf = new MaskedTextController(mask: "000.000.000-00");
 
   @override
   Widget build(BuildContext context) {
@@ -64,7 +67,7 @@ class _CadastroState extends State<Cadastro> {
                       ),
 
                       TextField(
-                        decoration: InputDecoration(labelText: "Data de Nascimento"),
+                        decoration: InputDecoration(labelText: "Data de Nascimento",),
                         controller: data,
                       ),
 
@@ -83,6 +86,7 @@ class _CadastroState extends State<Cadastro> {
                         obscureText: true,
                         controller: senha,
                       ),
+
                       Row(
                         children: <Widget>[
                           Checkbox(
@@ -171,3 +175,4 @@ class _CadastroState extends State<Cadastro> {
     );
   }
 }
+
