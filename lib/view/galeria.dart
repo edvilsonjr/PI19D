@@ -30,7 +30,7 @@ class _GaleriaState extends State<Galeria> {
           centerTitle: true,
           iconTheme: IconThemeData(color: Colors.deepOrange[400]),
           title: Text(
-            "Cadastro da Chácara",
+            "Fotos da Chácara",
             style: TextStyle(
               fontSize: 21,
               color: Colors.deepOrange[400],

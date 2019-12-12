@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class Calendario extends StatefulWidget {
+  bool proprietario;
+  Calendario(this.proprietario);
+
   @override
   _CalendarioState createState() => _CalendarioState();
 }
@@ -11,7 +14,6 @@ class _CalendarioState extends State<Calendario> {
   Map<DateTime, List<dynamic>> _events;
   TextEditingController _eventController;
   List<dynamic> _selectedEvents;
-
 
   @override
   void initState() {
@@ -85,11 +87,13 @@ class _CalendarioState extends State<Calendario> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
+      floatingActionButton: Visibility(
+        visible: widget.proprietario == false ? false : true,
+        child: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: _showAddDialog,
         backgroundColor: Colors.deepOrange[400],
-      ),
+      ),),
     );
   }
 

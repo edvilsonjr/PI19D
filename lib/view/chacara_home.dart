@@ -16,6 +16,8 @@ class ChacaraHome extends StatefulWidget {
 class _ChacaraHomeState extends State<ChacaraHome> {
   bool estimativa = true;
   bool observacao = true;
+  bool usuario = false;
+
   Map<int, dynamic> Fotos = Map();
 
   @override
@@ -36,10 +38,13 @@ class _ChacaraHomeState extends State<ChacaraHome> {
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
-//                child: widget.CapaPrincipal[0] == null
-//                    ? Icon(Icons.photo)
-//                    : Image.network(widget.CapaPrincipal[0])),
-                child: Icon(Icons.photo)),
+                height: 300,
+                width: 500,
+                decoration: BoxDecoration(color: Colors.grey[200]),
+                child: widget.dadoschacara["foto_destaque"] == null
+                    ? Icon(Icons.photo)
+                    : Image.network(widget.dadoschacara["foto_destaque"])),
+                //child: Icon(Icons.photo)),
             Divider(
               color: Colors.black,
               height: 2.0,
@@ -48,61 +53,80 @@ class _ChacaraHomeState extends State<ChacaraHome> {
             /*-----Nome da chácara------*/
             Row(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 5.0, left: 8.0),
-                  child: Text(
-                    "Chácara A",
-                    style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 5.0, left: 8.0),
+                    child: Text(
+                      "Chácara A",
+                      style: TextStyle(
+                          fontSize: 20.0, fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 220.0),
+                  padding: const EdgeInsets.only(left: 210.0),
                   child: Icon(
                     Icons.star,
                     color: Colors.yellow[700],
                   ),
                 ),
-                Text("4.5"),
+                Text(
+                  "4.5",
+                  style: TextStyle(fontSize: 15.0),
+                ),
+                IconButton(
+                    icon: Icon(
+                      FontAwesomeIcons.solidHeart,
+                      size: 18.0,
+                      color: Colors.red[600],
+                    ),
+                    onPressed: () {
+                      //enviar para a página de salvos
+                    }),
               ],
             ),
             /*-------------DATA----------------------*/
             Row(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0, top: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text("Rua Teste, 02 - Jardim Teste"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text("São João da Boa Vista - SP"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text("13870-000"),
-                      ),
-                    ],
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5.0, top: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                            padding: const EdgeInsets.only(left: 5.0),
+                            child: Text(
+                              "Rua Teste, 02 - Jardim Teste",
+                            )),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Text("São João da Boa Vista - SP"),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.only(left: 140.0),
+
+                 Padding(
+                    padding: const EdgeInsets.only(left: 155.0),
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: Colors.green[200],
+                        borderRadius: BorderRadius.circular(1000)
+                      ),
                     child: IconButton(
+                      color: Colors.deepOrange[800],
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Calendario()));
+                                builder: (context) => Calendario(usuario)));
                       },
-                      icon: Icon(FontAwesomeIcons.calendarAlt),
+                      icon: Icon(FontAwesomeIcons.calendarAlt, size: 25.0,),
                     ),
                   ),
-                ),
+                 ),
               ],
             ),
             Padding(
@@ -114,7 +138,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                     size: 16.0,
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left: 4.0),
+                    padding: const EdgeInsets.only(top: 8.0, left: 4.0),
                     child: Text(
                       "email@email.com.br",
                       style: TextStyle(fontWeight: FontWeight.bold),
@@ -350,18 +374,21 @@ class _ChacaraHomeState extends State<ChacaraHome> {
             /*-------------------------infos adicionais-----------------------------*/
             observacao ? Observacao() : Text(""),
             /*-----------------------------------------------------------------------*/
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PaginaGaleria()));
-              },
-              color: Colors.deepOrange[400],
-              child: Text(
-                "Galeria",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 17.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PaginaGaleria()));
+                },
+                color: Colors.deepOrange[400],
+                child: Text(
+                  "Galeria",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 17.0),
+                ),
               ),
             ),
           ],
@@ -375,7 +402,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
       children: <Widget>[
         Text(
           "Estimativas: ",
-          style: TextStyle(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
         ),
         Padding(
           padding: const EdgeInsets.only(top: 8.0),
@@ -424,7 +451,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
           ),
         ),
         Padding(
-          padding: const EdgeInsets.only(top: 8.0),
+          padding: const EdgeInsets.only(top: 10.0),
           child: Divider(
             color: Colors.black,
             height: 20.0,
@@ -440,7 +467,7 @@ Widget Observacao() {
     children: <Widget>[
       Text(
         "Informações adicionais: ",
-        style: TextStyle(fontWeight: FontWeight.bold),
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 15.0),
       ),
       Padding(
         padding: const EdgeInsets.only(left: 8.0, top: 8.0),

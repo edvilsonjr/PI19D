@@ -17,6 +17,7 @@ class PaginaChacara extends StatefulWidget {
 class _PaginaChacaraState extends State<PaginaChacara> {
   bool estimativa = true;
   bool observacao = true;
+  bool usuario = true;
 
   @override
   Widget build(BuildContext context) {
@@ -24,11 +25,14 @@ class _PaginaChacaraState extends State<PaginaChacara> {
       appBar: AppBar(
         centerTitle: true,
         title: Text(
-          "Chácara",
-          style: TextStyle(color: Colors.deepOrange[400], fontSize: 21),
+          "Pré - Visualização da Página da Chácara",
+          style: TextStyle(color: Colors.deepOrange[400], fontSize: 15),
         ),
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black38),
+        actions: <Widget>[
+          IconButton(icon: Icon(Icons.help_outline, color: Colors.green[800],), onPressed: (){}),
+        ],
       ),
       drawer: PageDrawer(),
       body: SingleChildScrollView(
@@ -36,6 +40,9 @@ class _PaginaChacaraState extends State<PaginaChacara> {
           //crossAxisAlignment: CrossAxisAlignment.center,
           children: <Widget>[
             Container(
+                height: 300,
+                width: 500,
+                decoration: BoxDecoration(color: Colors.grey[200]),
                 child: widget.CapaPrincipal[0] == null
                     ? Icon(Icons.photo)
                     : Image.network(widget.CapaPrincipal[0])),
@@ -62,34 +69,32 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                     color: Colors.yellow[700],
                   ),
                 ),
-                Text("4.5"),
+                Text("4.5", style: TextStyle(fontSize: 15.0)),
               ],
             ),
             /*-------------DATA----------------------*/
             Row(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 5.0, top: 8.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text("Rua Teste, 02 - Jardim Teste"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text("São João da Boa Vista - SP"),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
-                        child: Text("13870-000"),
-                      ),
-                    ],
+                Flexible(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 5.0, top: 8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: <Widget>[
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Text("Rua Teste, 02 - Jardim Teste"),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 5.0),
+                          child: Text("São João da Boa Vista - SP"),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 63.0),
+                  padding: const EdgeInsets.only(left: 80.0),
                   child: Text(
                     "Editar datas:",
                     style: TextStyle(
@@ -97,16 +102,14 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                         color: Colors.deepOrange[400]),
                   ),
                 ),
-                Expanded(
-                  child: IconButton(
-                    onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => Calendario()));
-                    },
-                    icon: Icon(FontAwesomeIcons.calendarAlt),
-                  ),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Calendario(usuario)));
+                  },
+                  icon: Icon(FontAwesomeIcons.calendarAlt),
                 ),
               ],
             ),
@@ -293,7 +296,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text("observações"),
+                  Flexible(child: Text("observações")),
                 ],
               ),
             ),
@@ -315,7 +318,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text("observações"),
+                  Flexible(child: Text("observações")),
                 ],
               ),
             ),
@@ -337,7 +340,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text("observações"),
+                  Flexible(child: Text("observações")),
                 ],
               ),
             ),
@@ -356,18 +359,21 @@ class _PaginaChacaraState extends State<PaginaChacara> {
             /*-------------------------infos adicionais-----------------------------*/
             observacao ? Observacao() : Text(""),
             /*-----------------------------------------------------------------------*/
-            RaisedButton(
-              onPressed: () {
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => PaginaGaleria()));
-              },
-              color: Colors.deepOrange[400],
-              child: Text(
-                "Galeria",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 17.0),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: RaisedButton(
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PaginaGaleria()));
+                },
+                color: Colors.deepOrange[400],
+                child: Text(
+                  "Galeria",
+                  style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                      fontSize: 17.0),
+                ),
               ),
             ),
           ],
@@ -453,7 +459,8 @@ Widget Observacao() {
         child: Row(
           children: <Widget>[
             Flexible(
-                child: Text("Local confortável, fácil acesso, permitido som até as 22 horas. Faça sua festa aqui!") ,
+              child: Text(
+                  "Local confortável, fácil acesso, permitido som até as 22 horas. Faça sua festa aqui!"),
             ),
           ],
         ),

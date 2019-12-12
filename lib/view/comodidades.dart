@@ -49,7 +49,7 @@ class _ComodidadeState extends State<Comodidade> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "Cadastro da Chácara",
+            "Informações Gerais da Chácara",
             style: TextStyle(
               fontSize: 21,
               color: Colors.deepOrange[400],
@@ -65,7 +65,7 @@ class _ComodidadeState extends State<Comodidade> {
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, top: 8.0),
                 child: Text(
-                  "Selecione as comodidades do local e informe os detalhes.",
+                  "Selecione as comodidades do local e informe os detalhes:",
                   style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                 ),
               ),

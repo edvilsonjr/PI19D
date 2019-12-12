@@ -25,7 +25,7 @@ class _CadChacaraState extends State<CadChacara> {
           appBar: AppBar(
             centerTitle: true,
             title: Text(
-              "Cadastro da Chácara",
+              "Dados da Chácara",
               style: TextStyle(
                 fontSize: 21,
                 color: Colors.deepOrange[400],
@@ -43,10 +43,9 @@ class _CadChacaraState extends State<CadChacara> {
                   //Nome da Chacara
                   TextField(
                     decoration: InputDecoration(
-                      //labelText: "Nome da Chácara",
-                      labelText: "Nome da Chácara",
-                      labelStyle: TextStyle(color: Colors.black)
-                    ),
+                        //labelText: "Nome da Chácara",
+                        labelText: "Nome da Chácara",
+                        labelStyle: TextStyle(color: Colors.black)),
                   ),
                   Row(
                     children: <Widget>[
@@ -54,7 +53,7 @@ class _CadChacaraState extends State<CadChacara> {
                         child: /*Endereço*/ TextField(
                           decoration: InputDecoration(
                             labelText: "Endereço",
-                           labelStyle: TextStyle(color: Colors.black),
+                            labelStyle: TextStyle(color: Colors.black),
                             hintText: "Rua, Avenida",
                           ),
                         ),
@@ -66,17 +65,21 @@ class _CadChacaraState extends State<CadChacara> {
                       Expanded(
                         child: /*Número*/ TextField(
                           keyboardType:
-                          TextInputType.numberWithOptions(decimal: true),
+                              TextInputType.numberWithOptions(decimal: true),
                           decoration: InputDecoration(
-                            labelText: "Número",
-                             labelStyle: TextStyle(color: Colors.black)
-                          ),
+                              labelText: "Número",
+                              labelStyle: TextStyle(color: Colors.black)),
                         ),
                       ),
-                      Text("Estado: ", style: TextStyle(fontSize: 17.0, color: Colors.black),),
-
                       Padding(
-                        padding: const EdgeInsets.only(left: 5.0),
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          "Estado: ",
+                          style: TextStyle(fontSize: 17.0, color: Colors.black),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right:8.0, left: 5.0),
                         child: DropdownButton<String>(
                           value: valueEstado,
                           iconSize: 24,
@@ -90,10 +93,8 @@ class _CadChacaraState extends State<CadChacara> {
                               valueEstado = newValue;
                             });
                           },
-                          items: <String>[
-                            'MG',
-                            'SP'
-                          ].map<DropdownMenuItem<String>>((String value) {
+                          items: <String>['MG', 'SP']
+                              .map<DropdownMenuItem<String>>((String value) {
                             return DropdownMenuItem<String>(
                               value: value,
                               child: Text(value),
@@ -105,45 +106,47 @@ class _CadChacaraState extends State<CadChacara> {
                   ),
                   Row(
                     children: <Widget>[
-
-                      Text("Cidade: ", style: TextStyle(fontSize: 17.0, color: Colors.black),),
-
-                        Padding(
-                          padding: const EdgeInsets.only(left: 5.0),
-                          child: DropdownButton<String>(
-                            value: valueCidade,
-                            iconSize: 24,
-                            elevation: 16,
-                            underline: Container(
-                              height: 1.4,
-                              color: Colors.deepOrange[400],
-                            ),
-                            onChanged: (String newValue) {
-                              setState(() {
-                                valueCidade = newValue;
-                              });
-                            },
-                            items: <String>[
-                              'São João da Boa Vista',
-                              'Aguaí',
-                              'Poços de Caldas',
-                              'Águas da Prata',
-                              'Espírito Santo do Pinhal',
-                              'Vargem Grande do Sul'
-                            ].map<DropdownMenuItem<String>>((String value) {
-                              return DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(value),
-                              );
-                            }).toList(),
-                          ),
+                      Padding(
+                        padding: const EdgeInsets.only(top: 10.0),
+                        child: Text(
+                          "Cidade: ",
+                          style: TextStyle(fontSize: 17.0, color: Colors.black),
                         ),
-
-
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 5.0),
+                        child: DropdownButton<String>(
+                          value: valueCidade,
+                          iconSize: 24,
+                          elevation: 16,
+                          underline: Container(
+                            height: 1.4,
+                            color: Colors.deepOrange[400],
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              valueCidade = newValue;
+                            });
+                          },
+                          items: <String>[
+                            'São João da Boa Vista',
+                            'Aguaí',
+                            'Poços de Caldas',
+                            'Águas da Prata',
+                            'Espírito Santo do Pinhal',
+                            'Vargem Grande do Sul'
+                          ].map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
+                    padding: const EdgeInsets.only(top:8.0, right: 8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[

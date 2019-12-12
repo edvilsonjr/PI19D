@@ -32,7 +32,7 @@ class _PessoaMesaState extends State<PessoaMesa> {
         appBar: AppBar(
           centerTitle: true,
           title: Text(
-            "Cadastro da Chácara",
+            "Informações Adicionais",
             style: TextStyle(
               fontSize: 21,
               color: Colors.deepOrange[400],
