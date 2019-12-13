@@ -4,6 +4,7 @@ import 'comodidades.dart';
 import 'comodidades_p2.dart';
 import 'diarias.dart';
 import 'galeria.dart';
+import 'package:pi/model/chacara_model.dart';
 
 class CadChacara extends StatefulWidget {
   @override
@@ -15,11 +16,17 @@ class _CadChacaraState extends State<CadChacara> {
   String valueCidade;
   String valueEstado;
 
+  /*--------------------------------------------------------------------*/
+  TextEditingController controllernome = TextEditingController();
+  TextEditingController controllerendereco = TextEditingController();
+  TextEditingController controllerbairro = TextEditingController();
+  TextEditingController controllernumero = TextEditingController();
+  /*--------------------------------------------------------------------*/
+
   @override
   Widget build(BuildContext context) {
     return PageView(
       controller: page,
-      //scrollDirection: A,
       children: <Widget>[
         Scaffold(
           appBar: AppBar(
@@ -37,11 +44,12 @@ class _CadChacaraState extends State<CadChacara> {
           ),
           body: SingleChildScrollView(
             child: Padding(
-              padding: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: <Widget>[
                   //Nome da Chacara
                   TextField(
+                    controller: controllernome,
                     decoration: InputDecoration(
                         //labelText: "Nome da Chácara",
                         labelText: "Nome da Chácara",
@@ -50,7 +58,8 @@ class _CadChacaraState extends State<CadChacara> {
                   Row(
                     children: <Widget>[
                       Expanded(
-                        child: /*Endereço*/ TextField(
+                        child: TextField(
+                          controller: controllerendereco,
                           decoration: InputDecoration(
                             labelText: "Endereço",
                             labelStyle: TextStyle(color: Colors.black),
@@ -63,7 +72,16 @@ class _CadChacaraState extends State<CadChacara> {
                   Row(
                     children: <Widget>[
                       Expanded(
+                        child: /*Bairro*/ TextField(
+                          controller: controllerbairro,
+                          decoration: InputDecoration(
+                              labelText: "Bairro",
+                              labelStyle: TextStyle(color: Colors.black)),
+                        ),
+                      ),
+                      Expanded(
                         child: /*Número*/ TextField(
+                          controller: controllernumero,
                           keyboardType:
                               TextInputType.numberWithOptions(decimal: true),
                           decoration: InputDecoration(
@@ -71,39 +89,9 @@ class _CadChacaraState extends State<CadChacara> {
                               labelStyle: TextStyle(color: Colors.black)),
                         ),
                       ),
-                      Padding(
-                        padding: const EdgeInsets.only(top: 10.0),
-                        child: Text(
-                          "Estado: ",
-                          style: TextStyle(fontSize: 17.0, color: Colors.black),
-                        ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(right:8.0, left: 5.0),
-                        child: DropdownButton<String>(
-                          value: valueEstado,
-                          iconSize: 24,
-                          elevation: 16,
-                          underline: Container(
-                            height: 1.4,
-                            color: Colors.deepOrange[400],
-                          ),
-                          onChanged: (String newValue) {
-                            setState(() {
-                              valueEstado = newValue;
-                            });
-                          },
-                          items: <String>['MG', 'SP']
-                              .map<DropdownMenuItem<String>>((String value) {
-                            return DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(value),
-                            );
-                          }).toList(),
-                        ),
-                      ),
                     ],
                   ),
+
                   Row(
                     children: <Widget>[
                       Padding(
@@ -143,15 +131,59 @@ class _CadChacaraState extends State<CadChacara> {
                           }).toList(),
                         ),
                       ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 8.0, top: 10.0),
+                        child: Text(
+                          "Estado: ",
+                          style: TextStyle(fontSize: 17.0, color: Colors.black),
+                        ),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(right: 8.0, left: 5.0),
+                        child: DropdownButton<String>(
+                          value: valueEstado,
+                          iconSize: 24,
+                          elevation: 16,
+                          underline: Container(
+                            height: 1.4,
+                            color: Colors.deepOrange[400],
+                          ),
+                          onChanged: (String newValue) {
+                            setState(() {
+                              valueEstado = newValue;
+                            });
+                          },
+                          items: <String>['MG', 'SP']
+                              .map<DropdownMenuItem<String>>((String value) {
+                            return DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(value),
+                            );
+                          }).toList(),
+                        ),
+                      ),
                     ],
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top:8.0, right: 8.0),
+                    padding: const EdgeInsets.only(top: 8.0, right: 8.0),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: <Widget>[
                         RaisedButton(
                           onPressed: () {
+                            ChacaraModel.of(context).nomechacara =
+                                controllernome.text;
+                            ChacaraModel.of(context).endereco =
+                                controllerendereco.text;
+                            ChacaraModel.of(context).bairro =
+                                controllerbairro.text;
+                            ChacaraModel.of(context).numero =
+                                int.parse(controllernumero.text);
+                            ChacaraModel.of(context).cidade =
+                                controllernome.text;
+                            ChacaraModel.of(context).estado =
+                                controllernome.text;
+
                             page.jumpToPage(1);
                           },
                           shape: RoundedRectangleBorder(

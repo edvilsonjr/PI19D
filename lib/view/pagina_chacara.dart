@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pi/view/pagina_galeria_chacara.dart';
-
 import 'calendario.dart';
 import 'drawer.dart';
 

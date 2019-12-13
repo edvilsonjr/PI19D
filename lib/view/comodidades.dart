@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/model/chacara_model.dart';
 
 class Comodidade extends StatefulWidget {
   PageController page = PageController();
@@ -10,24 +11,18 @@ class Comodidade extends StatefulWidget {
 
 class _ComodidadeState extends State<Comodidade> {
   //CheckBox
-  //bool qtdpessoas = false;
-  bool qtdquartos = false;
-  //bool qtdcamas = false;
+  //bool qtdquartos = false;
   bool qtdbanheiro = false;
   bool piscina = false;
   bool churrasqueira = false;
-  //bool qtdmesas = false;
   bool areacoberta = false;
   bool tomada110 = false;
   bool tomada220 = false;
   bool estacionamento = false;
-  //bool qtdcarros = false;
 
   TextEditingController quarto = TextEditingController();
   TextEditingController cama = TextEditingController();
-  TextEditingController banheiro = TextEditingController();
-  //TextEditingController pessoa = TextEditingController();
-  //TextEditingController mesa = TextEditingController();
+  TextEditingController banheiro= TextEditingController();
   TextEditingController carro = TextEditingController();
   TextEditingController t110 = TextEditingController();
   TextEditingController t220 = TextEditingController();
@@ -39,6 +34,38 @@ class _ComodidadeState extends State<Comodidade> {
   Future<bool> jumpPagina() async {
     widget.page.jumpToPage(1);
     return false;
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    if(ChacaraModel.of(context).qtdquarto != null){
+      quarto.text = ChacaraModel.of(context).qtdquarto.toString();
+    }
+    if(ChacaraModel.of(context).camas != null){
+      cama.text = ChacaraModel.of(context).camas.toString();
+    }
+    if(ChacaraModel.of(context).qtdbanheiro != null){
+      banheiro.text = ChacaraModel.of(context).qtdbanheiro.toString();
+    }
+    if(ChacaraModel.of(context).carros != null){
+      carro.text = ChacaraModel.of(context).carros.toString();
+    }
+    if(ChacaraModel.of(context).tomada110 != null){
+      t110.text = ChacaraModel.of(context).tomada110.toString();
+    }
+    if(ChacaraModel.of(context).tomada220 != null){
+      t220.text = ChacaraModel.of(context).tomada220.toString();
+    }
+    if(ChacaraModel.of(context).piscina ){
+      pisc.text = ChacaraModel.of(context).piscina.toString();
+    }
+    if(ChacaraModel.of(context).areacoberta ){
+      acoberta.text = ChacaraModel.of(context).areacoberta.toString();
+    }
+    if(ChacaraModel.of(context).churrasqueira ){
+      churras.text = ChacaraModel.of(context).churrasqueira.toString();
+    }
   }
 
   @override
@@ -76,10 +103,10 @@ class _ComodidadeState extends State<Comodidade> {
                     Expanded(
                       child: Checkbox(
                           activeColor: Colors.green[200],
-                          value: qtdquartos,
+                          value: ChacaraModel.of(context).quarto,
                           onChanged: (bool value) {
                             setState(() {
-                              qtdquartos = value;
+                              ChacaraModel.of(context).quarto = value;
                             });
                           }),
                     ),
@@ -92,17 +119,28 @@ class _ComodidadeState extends State<Comodidade> {
                       child: Padding(
                         padding: const EdgeInsets.only(left: 15.0),
                         child: TextField(
-                          enabled: qtdquartos,
+                          enabled: ChacaraModel.of(context).quarto,
                           controller: quarto,
                           keyboardType:
                               TextInputType.numberWithOptions(decimal: true),
                           decoration: InputDecoration(
-                            hintText: "Camas",
+                            hintText: "Quartos",
                           ),
                         ),
                       ),
                     ),
                   ],
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(left: 265.0, right: 35.0),
+                child: TextField(
+                  enabled: ChacaraModel.of(context).quarto,
+                  controller: cama,
+                  keyboardType: TextInputType.numberWithOptions(decimal: true),
+                  decoration: InputDecoration(
+                    hintText: "Camas",
+                  ),
                 ),
               ),
               Padding(
@@ -364,6 +402,31 @@ class _ComodidadeState extends State<Comodidade> {
                   children: <Widget>[
                     RaisedButton(
                       onPressed: () {
+                        //ChacaraModel.of(context).quarto = qtdquartos;
+                        ChacaraModel.of(context).qtdquarto =
+                          quarto.text != "" ? int.parse(quarto.text) : 0;
+//                        ChacaraModel.of(context).camas =
+//                            qtdquartos ? int.parse(cama.text) : 0;
+//                        ChacaraModel.of(context).banheiro = qtdbanheiro;
+//                        ChacaraModel.of(context).qtdbanheiro =
+//                            qtdbanheiro ? int.parse(banheiro.text) : 0;
+//                        ChacaraModel.of(context).estacionamento =
+//                            estacionamento;
+//                        ChacaraModel.of(context).carros =
+//                            estacionamento ? int.parse(carro.text) : 0;
+//                        ChacaraModel.of(context).tomada110 =
+//                            tomada110 ? int.parse(t110.text) : 0;
+//                        ChacaraModel.of(context).tomada220 =
+//                            tomada220 ? int.parse(t220.text) : 0;
+//                        ChacaraModel.of(context).piscina = piscina;
+//                        ChacaraModel.of(context).obspiscina = pisc.text ?? "";
+                        ChacaraModel.of(context).churrasqueira = churrasqueira;
+//                        ChacaraModel.of(context).obschurras =
+//                            churras.text ?? "";
+//                        ChacaraModel.of(context).areacoberta = areacoberta;
+//                        ChacaraModel.of(context).obsareacoberta =
+//                            acoberta.text ?? "";
+
                         widget.page.jumpToPage(3);
                       },
                       shape: RoundedRectangleBorder(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:pi/model/chacara_model.dart';
 
 class PessoaMesa extends StatefulWidget {
   PageController page = PageController();
@@ -10,7 +11,6 @@ class PessoaMesa extends StatefulWidget {
 
 class _PessoaMesaState extends State<PessoaMesa> {
   //CheckBox
-  //bool qtdpessoas = false;
   bool qtdmesas = false;
   bool qtdmesasnao = false;
 
@@ -23,6 +23,7 @@ class _PessoaMesaState extends State<PessoaMesa> {
     widget.page.jumpToPage(2);
     return false;
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,6 @@ class _PessoaMesaState extends State<PessoaMesa> {
               Padding(
                 padding: const EdgeInsets.only(left: 15.0, right: 15.0),
                 child: TextField(
-                  //enabled: qtdpessoas,
                   controller: pessoa,
                   decoration: InputDecoration(
                     hintText: "Resposta",
@@ -164,6 +164,11 @@ class _PessoaMesaState extends State<PessoaMesa> {
                   children: <Widget>[
                     RaisedButton(
                       onPressed: () {
+                        ChacaraModel.of(context).qtdpessoa = pessoa.text == "" || int.parse(pessoa.text) == null ?  0 : int.parse(pessoa.text);
+                        ChacaraModel.of(context).mesa = qtdmesas;
+                        ChacaraModel.of(context).mesanao = qtdmesasnao;
+                        ChacaraModel.of(context).qtdmesa = qtdmesas ? int.parse(mesa.text) : 0;
+                        ChacaraModel.of(context).observacao = comentario.text == null || comentario.text == "" ? "":comentario.text;
                         widget.page.jumpToPage(4);
                       },
                       shape: RoundedRectangleBorder(
