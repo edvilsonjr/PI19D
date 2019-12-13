@@ -169,9 +169,7 @@ class _homeState extends State<home> {
                       ),
                     ],
                   ),
-
                   //Possibilidade de colocar filtro por data
-
                   Divider(
                     color: Colors.black,
                     height: 2,

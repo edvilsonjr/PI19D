@@ -57,4 +57,6 @@ class PessoaModel extends Model{
     cpf = datas["pessoa"][0]["cpf"];
     uid = datas["pessoa"][0]["uid"];
   }
+
+
 }

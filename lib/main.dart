@@ -5,6 +5,7 @@ import 'package:pi/view/cadastro.dart';
 import 'package:pi/view/home.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/pessoa_model.dart';
+import 'package:pi/view/perfil.dart';
 
 void main() async{
   runApp(ScopedModel(
@@ -17,13 +18,14 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: home(),
+      home: TelaLogin(),
       debugShowCheckedModeBanner: false,
         routes: <String, WidgetBuilder>{
           '/TelaLogin': (BuildContext context) => TelaLogin(),
           '/Cadastro': (BuildContext context) => Cadastro(),
           '/Home' : (BuildContext context) => home(),
           '/CadChacara' : (BuildContext context) => CadChacara(),
+          '/Perfil' : (BuildContext context) => Perfil(),
         }
     );
   }

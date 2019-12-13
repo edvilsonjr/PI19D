@@ -36,6 +36,7 @@ class _CadastroState extends State<Cadastro> {
         ),
         centerTitle: true,
         backgroundColor: Colors.white,
+        iconTheme: IconThemeData(color: Colors.deepOrange[400]),
       ),
       body:
       SingleChildScrollView(child: Container(
