@@ -3,6 +3,7 @@ import 'package:pi/view/cadastro_chacara.dart';
 import 'package:pi/view/tela_login.dart';
 import 'package:pi/view/cadastro.dart';
 import 'package:pi/view/home.dart';
+import 'package:pi/view/perfil.dart';
 import 'package:scoped_model/scoped_model.dart';
 import 'model/pessoa_model.dart';
 import 'model/chacara_model.dart';
@@ -27,6 +28,7 @@ class App extends StatelessWidget {
           '/Cadastro': (BuildContext context) => Cadastro(),
           '/Home' : (BuildContext context) => home(),
           '/CadChacara' : (BuildContext context) => CadChacara(),
+          '/Perfil' : (BuildContext context) => Perfil(),
         }
     );
   }
