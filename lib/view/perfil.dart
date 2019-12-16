@@ -57,6 +57,9 @@ class _PerfilState extends State<Perfil> {
                 ),
               ),
             ),
+            Divider(
+              color: Colors.black,
+            ),
             Expanded(
               child: TabBarView(
                 children: <Widget>[

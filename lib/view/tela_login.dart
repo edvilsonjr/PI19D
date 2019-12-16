@@ -130,6 +130,16 @@ class _TelaLoginState extends State<TelaLogin> {
                         padding: const EdgeInsets.all(10),
                         child: RaisedButton(
                           onPressed: () {
+                            if(_email == null || _email == "" || _senha == null || _senha == ""){
+                              _scaffoldkey.currentState.showSnackBar(
+                                  SnackBar(
+                                    content: Text("Login ou Senha Invalidos"),
+                                    backgroundColor: Colors.red,
+                                    duration: Duration(seconds: 3),
+                                  )
+                              );
+                            }
+                            else{
                             FirebaseAuth.instance.signInWithEmailAndPassword(email: _email, password: _senha).then((user){
                               print("Deu Certo o login");
                               PessoaModel.of(context).uid = user.uid;
@@ -145,6 +155,7 @@ class _TelaLoginState extends State<TelaLogin> {
                                   )
                               );
                             });
+                            }
                           },
                           padding: EdgeInsets.symmetric(horizontal: 98),
                           color: Colors.deepOrange[400],

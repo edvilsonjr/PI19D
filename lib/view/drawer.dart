@@ -31,6 +31,13 @@ class PageDrawer extends StatelessWidget {
               trailing: Icon(Icons.arrow_forward_ios, size: 17.0,) ,
             ),
             ListTile(
+              title: Text('Salvos', style: TextStyle(fontSize: 18)),
+              onTap: () {
+                Navigator.of(context).pushNamed('/Perfil');
+              },
+              trailing: Icon(Icons.arrow_forward_ios, size: 17.0,) ,
+            ),
+            ListTile(
               title: Text('Cadastrar Chácara', style: TextStyle(fontSize: 18)),
               onTap: () {
                 Navigator.of(context).pushNamed('/CadChacara');
