@@ -2,6 +2,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:pi/view/pagina_chacara.dart';
+import 'package:pi/model/chacara_model.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class Galeria extends StatefulWidget {
   PageController page = PageController();
@@ -52,7 +54,16 @@ class _GaleriaState extends State<Galeria> {
               child: GaleriaImagem(context),
             ),
             RaisedButton(
-              onPressed: () {
+              onPressed: () async {
+
+                 await ChacaraModel.of(context).Salvar(PessoaModel.of(context).cdg);
+
+                 ChacaraModel.of(context).ConverteListaFotos(Fotos);
+
+                 await ChacaraModel.of(context).SalvarFotosBanco();
+                  print("cdgChacara = ${ChacaraModel.of(context).cdgchacara}");
+
+
                 Navigator.push(
                     context,
                     MaterialPageRoute(
@@ -111,9 +122,7 @@ class _GaleriaState extends State<Galeria> {
                                 StorageUploadTask task = FirebaseStorage
                                     .instance
                                     .ref()
-                                    .child("foto" +
-                                        DateTime.now()
-                                            .toString()) //nome do arquivo
+                                    .child("foto" + index.toString()+ChacaraModel.of(context).cdgchacara.toString()) //nome do arquivo
                                     .putFile(file);
 
                                 StorageTaskSnapshot taskSnapshot =
@@ -155,6 +164,7 @@ class _GaleriaState extends State<Galeria> {
                                 setState(() {
                                   Fotos[index] = url;
                                 });
+
                               }
                             });
                           },

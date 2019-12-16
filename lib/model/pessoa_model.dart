@@ -5,6 +5,7 @@ import 'package:scoped_model/scoped_model.dart';
 import 'package:http/http.dart' as http;
 
 class PessoaModel extends Model{
+  int cdg;
   String uid;
   String cpf;
   String nome;
@@ -38,6 +39,7 @@ class PessoaModel extends Model{
 
         print("Resposta Status:${resposta.statusCode}");
         print("Resposta Body da Página:${resposta.body}");
+        cdg =  int.parse(resposta.body);
   }
 
   void LogarSistema() async{
@@ -56,6 +58,7 @@ class PessoaModel extends Model{
     senha = datas["pessoa"][0]["senha"];
     cpf = datas["pessoa"][0]["cpf"];
     uid = datas["pessoa"][0]["uid"];
+    cdg = int.parse(datas["pessoa"][0]["cdg_pessoa"]);
   }
 
 

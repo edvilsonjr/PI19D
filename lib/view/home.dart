@@ -236,10 +236,11 @@ class _homeState extends State<home> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      child: Icon(
+                      child: snapshot.data["chacara"][index]["foto_destaque"] == null ? Icon(
                         Icons.image,
                         size: 75,
-                      ),
+                      ):
+                          Image.network(snapshot.data["chacara"][index]["foto_destaque"]),
                       height: 110,
                       width: 175,
                       decoration: BoxDecoration(

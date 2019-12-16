@@ -180,9 +180,9 @@ class _CadChacaraState extends State<CadChacara> {
                             ChacaraModel.of(context).numero =
                                 int.parse(controllernumero.text);
                             ChacaraModel.of(context).cidade =
-                                controllernome.text;
+                                valueCidade;
                             ChacaraModel.of(context).estado =
-                                controllernome.text;
+                                valueEstado;
 
                             page.jumpToPage(1);
                           },

@@ -3,6 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pi/view/pagina_galeria_chacara.dart';
 import 'calendario.dart';
 import 'drawer.dart';
+import 'package:pi/model/chacara_model.dart';
 
 class PaginaChacara extends StatefulWidget {
   Map<int, dynamic> CapaPrincipal = Map();
@@ -30,13 +31,18 @@ class _PaginaChacaraState extends State<PaginaChacara> {
         backgroundColor: Colors.white,
         iconTheme: IconThemeData(color: Colors.black38),
         actions: <Widget>[
-          IconButton(icon: Icon(Icons.help_outline, color: Colors.green[800],), onPressed: (){}),
+          IconButton(
+              icon: Icon(
+                Icons.help_outline,
+                color: Colors.green[800],
+              ),
+              onPressed: () {}),
         ],
       ),
       drawer: PageDrawer(),
       body: SingleChildScrollView(
         child: Column(
-          //crossAxisAlignment: CrossAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             Container(
                 height: 300,
@@ -51,18 +57,19 @@ class _PaginaChacaraState extends State<PaginaChacara> {
             ),
 
             /*-----Nome da chácara------*/
+
+            Padding(
+              padding: const EdgeInsets.only(top: 5.0, left: 8.0),
+              child: Text(
+                ChacaraModel.of(context).nomechacara,
+                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+              ),
+            ),
             Row(
+              mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(top: 5.0, left: 8.0),
-                  child: Text(
-                    "Chácara A",
-                    style:
-                        TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 220.0),
+                  padding: const EdgeInsets.only(right: 10.0),
                   child: Icon(
                     Icons.star,
                     color: Colors.yellow[700],
@@ -71,45 +78,60 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                 Text("4.5", style: TextStyle(fontSize: 15.0)),
               ],
             ),
+
             /*-------------DATA----------------------*/
             Row(
               children: <Widget>[
-                Flexible(
-                  child: Padding(
+
+               Padding(
                     padding: const EdgeInsets.only(left: 5.0, top: 8.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         Padding(
                           padding: const EdgeInsets.only(left: 5.0),
-                          child: Text("Rua Teste, 02 - Jardim Teste"),
+                          child: Row(
+                            children: <Widget>[
+                              Text(ChacaraModel.of(context).endereco),
+                              Text(", "),
+                              Text(ChacaraModel.of(context).numero.toString()),
+                              Text(" - "),
+                              Text(ChacaraModel.of(context).bairro),
+                            ],
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 5.0),
-                          child: Text("São João da Boa Vista - SP"),
+                          child: Row(
+                            children: <Widget>[
+                              Text(ChacaraModel.of(context).cidade),
+                              Text(" - "),
+                              Text(ChacaraModel.of(context).estado)
+                            ],
+                          ),
                         ),
                       ],
                     ),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 80.0),
-                  child: Text(
-                    "Editar datas:",
-                    style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        color: Colors.deepOrange[400]),
-                  ),
-                ),
-                IconButton(
-                  onPressed: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => Calendario(usuario)));
-                  },
-                  icon: Icon(FontAwesomeIcons.calendarAlt),
-                ),
+
+//                Padding(
+//                  padding: const EdgeInsets.only(left: 80.0),
+//                  child: Text(
+//                    "Editar datas:",
+//                    style: TextStyle(
+//                        fontWeight: FontWeight.bold,
+//                        color: Colors.deepOrange[400]),
+//                  ),
+//                ),
+//                IconButton(
+//                  onPressed: () {
+//                    Navigator.push(
+//                        context,
+//                        MaterialPageRoute(
+//                            builder: (context) => Calendario(usuario)));
+//                  },
+//                  icon: Icon(FontAwesomeIcons.calendarAlt),
+//                ),
               ],
             ),
             Padding(

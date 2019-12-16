@@ -44,7 +44,6 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                 child: widget.dadoschacara["foto_destaque"] == null
                     ? Icon(Icons.photo)
                     : Image.network(widget.dadoschacara["foto_destaque"])),
-                //child: Icon(Icons.photo)),
             Divider(
               color: Colors.black,
               height: 2.0,
