@@ -1,13 +1,21 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:pi/view/pagina_galeria_chacara.dart';
 import 'package:http/http.dart' as http;
 import 'calendario.dart';
+import 'package:pi/model/pessoa_model.dart';
 
 class ChacaraHome extends StatefulWidget {
   dynamic dadoschacara;
+  int cdgDono;
+  Map<String, dynamic>dono = Map();
 
   ChacaraHome(this.dadoschacara);
+
+
+
 
   @override
   _ChacaraHomeState createState() => _ChacaraHomeState();
@@ -17,6 +25,20 @@ class _ChacaraHomeState extends State<ChacaraHome> {
   bool estimativa = true;
   bool observacao = true;
   bool usuario = false;
+
+  Future carrega_dadosdono(int cdgDono)async{
+    var url = "http://helpfestas.gearhostpreview.com/listar.php?tabela=pessoa&colTabela=uid&codigo=$cdgDono";
+
+    var resposta = await http.get(url);
+
+    widget.dono = json.decode(resposta.body);
+    print(widget.dono);
+  }
+  @override
+  void initState() {
+    super.initState();
+    carrega_dadosdono(int.parse(widget.dadoschacara["cdg_chacara_pessoa"]));
+  }
 
   Map<int, dynamic> Fotos = Map();
 
@@ -56,7 +78,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                   child: Padding(
                     padding: const EdgeInsets.only(top: 5.0, left: 8.0),
                     child: Text(
-                      "Chácara A",
+                      widget.dadoschacara['nome'],
                       style: TextStyle(
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
@@ -96,11 +118,13 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                         Padding(
                             padding: const EdgeInsets.only(left: 5.0),
                             child: Text(
-                              "Rua Teste, 02 - Jardim Teste",
+                             "${widget.dadoschacara['endereco']}, ${widget.dadoschacara['numero']} - ${widget.dadoschacara['bairro']}",
+                            //"Rua Teste, 02 - Jardim Teste"
                             )),
                         Padding(
                           padding: const EdgeInsets.only(left: 5.0),
-                          child: Text("São João da Boa Vista - SP"),
+                          child: Text("${widget.dadoschacara['cidade']} - ${widget.dadoschacara['estado']}"),
+                          //"São João da Boa Vista - SP"
                         ),
                       ],
                     ),
@@ -140,6 +164,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                     padding: const EdgeInsets.only(top: 8.0, left: 4.0),
                     child: Text(
                       "email@email.com.br",
+
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -204,13 +229,13 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-                Text("3"),
+                Text(widget.dadoschacara['qtd_quartos']),
                 Padding(
                   padding: const EdgeInsets.only(left: 8.0, right: 8.0),
                   child: Text("-"),
                 ),
                 Text("Camas: "),
-                Text("5"),
+                Text(widget.dadoschacara['qtd_camas']),
                 Padding(
                   padding: const EdgeInsets.only(left: 45.0),
                   child: Icon(
@@ -225,7 +250,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                     style: TextStyle(fontWeight: FontWeight.bold),
                   ),
                 ),
-                Text("4"),
+                Text(widget.dadoschacara['qtd_banheiros']),
               ],
             ),
             Padding(
@@ -251,7 +276,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                     child: Text("-"),
                   ),
                   Text("Capacidade: "),
-                  Text("5"),
+                  Text(widget.dadoschacara['qtd_carros']),
                   Text(" carros")
                 ],
               ),
@@ -274,7 +299,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text("3"),
+                  Text(widget.dadoschacara['tomada_110']),
                   Padding(
                     padding: const EdgeInsets.only(left: 45.0),
                     child: Icon(
@@ -289,7 +314,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text("4"),
+                  Text(widget.dadoschacara['tomada_220']),
                 ],
               ),
             ),
@@ -311,7 +336,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text("observações"),
+                  Text(widget.dadoschacara['piscina'] == 0 ? "Não tem Piscina" : widget.dadoschacara['obs_piscina'] ?? "Sim"),
                 ],
               ),
             ),
@@ -333,7 +358,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text("observações"),
+                  Text(widget.dadoschacara['churrasqueira'] == 0 ? "Não tem Piscina" : widget.dadoschacara['obs_churrasqueira'] ?? "Sim"),
                 ],
               ),
             ),
@@ -355,7 +380,7 @@ class _ChacaraHomeState extends State<ChacaraHome> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Text("observações"),
+                  Text(widget.dadoschacara['area_coberta'] == 0 ? "Não tem Piscina" : "Sim"),
                 ],
               ),
             ),

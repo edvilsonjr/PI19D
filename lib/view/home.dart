@@ -154,12 +154,11 @@ class _homeState extends State<home> {
                           });
                         },
                         items: <String>[
-                          ' ',
-                          'Menos de R\$250',
-                          'De R\$250 à 500 ',
-                          'De R\$500 à 750 ',
-                          'De R\$750 à 1000',
-                          'Mais de R\$1000'
+                          '',
+                          'A partir de R\$250',
+                          'A partir de R\$500',
+                          'A partir de R\$750',
+                          'A partir de R\$1000'
                         ].map<DropdownMenuItem<String>>((String value) {
                           return DropdownMenuItem<String>(
                             value: value,
