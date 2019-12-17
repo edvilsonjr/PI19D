@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:pi/model/pessoa_model.dart';
 import 'package:pi/view/pagina_galeria_chacara.dart';
 import 'calendario.dart';
-import 'drawer.dart';
 import 'package:pi/model/chacara_model.dart';
+
+import 'home.dart';
 
 class PaginaChacara extends StatefulWidget {
   Map<int, dynamic> CapaPrincipal = Map();
@@ -29,7 +31,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
           style: TextStyle(color: Colors.deepOrange[400], fontSize: 15),
         ),
         backgroundColor: Colors.white,
-        iconTheme: IconThemeData(color: Colors.black38),
+        iconTheme: IconThemeData(color: Colors.deepOrange[400]),
         actions: <Widget>[
           IconButton(
               icon: Icon(
@@ -39,7 +41,19 @@ class _PaginaChacaraState extends State<PaginaChacara> {
               onPressed: () {}),
         ],
       ),
-      drawer: PageDrawer(),
+      floatingActionButton: FloatingActionButton.extended(
+          onPressed: _showDialogFim, 
+          label: Text("Finalizar", style: TextStyle(
+            fontSize: 17.0
+          ),
+          ),
+        icon: Icon(
+          Icons.check,
+          color: Colors.white,
+          size: 25.0,
+        ),
+        backgroundColor: Colors.green[800],
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,25 +72,64 @@ class _PaginaChacaraState extends State<PaginaChacara> {
 
             /*-----Nome da chácara------*/
 
-            Padding(
-              padding: const EdgeInsets.only(top: 5.0, left: 8.0),
-              child: Text(
-                ChacaraModel.of(context).nomechacara,
-                style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
-              ),
+            Row(
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.only(top: 5.0, left: 8.0),
+                  child: Text(
+                    ChacaraModel.of(context).nomechacara,
+                    style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                  ),
+                ),
+//                Expanded(child: Padding(
+//                  padding: const EdgeInsets.only(left: 250.0),
+//                  child: Icon(
+//                    Icons.star,
+//                    color: Colors.yellow[700],
+//                  ),
+//                ),),
+//
+//                Padding(
+//                  padding: const EdgeInsets.only(right: 8.0),
+//                  child: Text("4.5", style: TextStyle(fontSize: 15.0)),
+//                ),
+              ],
             ),
+
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.only(right: 10.0),
-                  child: Icon(
-                    Icons.star,
-                    color: Colors.yellow[700],
+                  padding: const EdgeInsets.only(left: 80.0),
+                  child: Text(
+                    "Editar datas:",
+                    style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepOrange[400]),
                   ),
                 ),
-                Text("4.5", style: TextStyle(fontSize: 15.0)),
+                IconButton(
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => Calendario(usuario)));
+                  },
+                  icon: Icon(FontAwesomeIcons.calendarAlt),
+                ),
               ],
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("De segunda a quinta: R\$ 200,00"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text("De sexta a domingo: R\$ 240,00"),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(4.0),
+              child: Text("Feriado: R\$ 300,00"),
             ),
 
             /*-------------DATA----------------------*/
@@ -92,11 +145,11 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                           padding: const EdgeInsets.only(left: 5.0),
                           child: Row(
                             children: <Widget>[
-                              Text(ChacaraModel.of(context).endereco),
-                              Text(", "),
-                              Text(ChacaraModel.of(context).numero.toString()),
-                              Text(" - "),
-                              Text(ChacaraModel.of(context).bairro),
+                              Text(ChacaraModel.of(context).endereco, style: TextStyle(fontSize: 15.0),),
+                              Text(", ", style: TextStyle(fontSize: 15.0),),
+                              Text(ChacaraModel.of(context).numero.toString(), style: TextStyle(fontSize: 15.0),),
+                              Text(" - ", style: TextStyle(fontSize: 15.0),),
+                              Text(ChacaraModel.of(context).bairro, style: TextStyle(fontSize: 15.0),),
                             ],
                           ),
                         ),
@@ -104,9 +157,9 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                           padding: const EdgeInsets.only(left: 5.0),
                           child: Row(
                             children: <Widget>[
-                              Text(ChacaraModel.of(context).cidade),
-                              Text(" - "),
-                              Text(ChacaraModel.of(context).estado)
+                              Text(ChacaraModel.of(context).cidade, style: TextStyle(fontSize: 15.0),),
+                              Text(" - ", style: TextStyle(fontSize: 15.0),),
+                              Text(ChacaraModel.of(context).estado, style: TextStyle(fontSize: 15.0),)
                             ],
                           ),
                         ),
@@ -114,24 +167,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                     ),
                   ),
 
-//                Padding(
-//                  padding: const EdgeInsets.only(left: 80.0),
-//                  child: Text(
-//                    "Editar datas:",
-//                    style: TextStyle(
-//                        fontWeight: FontWeight.bold,
-//                        color: Colors.deepOrange[400]),
-//                  ),
-//                ),
-//                IconButton(
-//                  onPressed: () {
-//                    Navigator.push(
-//                        context,
-//                        MaterialPageRoute(
-//                            builder: (context) => Calendario(usuario)));
-//                  },
-//                  icon: Icon(FontAwesomeIcons.calendarAlt),
-//                ),
+
               ],
             ),
             Padding(
@@ -188,7 +224,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
               height: 20.0,
             ),
             Padding(
-              padding: const EdgeInsets.only(top: 3.0, bottom: 10.0),
+              padding: const EdgeInsets.only(top: 3.0, bottom: 10.0, left: 138.0),
               child: Text(
                 "Informações Gerais",
                 style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.bold),
@@ -317,7 +353,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Flexible(child: Text("observações")),
+                  Flexible(child: Text("profundidade de 3 metros")),
                 ],
               ),
             ),
@@ -339,7 +375,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Flexible(child: Text("observações")),
+                  Flexible(child: Text("não há utensílios")),
                 ],
               ),
             ),
@@ -361,7 +397,7 @@ class _PaginaChacaraState extends State<PaginaChacara> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   ),
-                  Flexible(child: Text("observações")),
+                  Flexible(child: Text("espaço amplo")),
                 ],
               ),
             ),
@@ -381,11 +417,12 @@ class _PaginaChacaraState extends State<PaginaChacara> {
             observacao ? Observacao() : Text(""),
             /*-----------------------------------------------------------------------*/
             Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(left: 160.0, top: 8.0),
               child: RaisedButton(
+
                 onPressed: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => PaginaGaleria()));
+                      MaterialPageRoute(builder: (context) => PaginaGaleria(Fotos:widget.CapaPrincipal)));
                 },
                 color: Colors.deepOrange[400],
                 child: Text(
@@ -402,6 +439,50 @@ class _PaginaChacaraState extends State<PaginaChacara> {
       ),
     );
   }
+  
+  _showDialogFim(){
+    showDialog(
+        context: context,
+      builder: (context) => AlertDialog(
+        title: Text("Finalizar o cadastro da chácara"),
+        actions: <Widget>[
+          FlatButton(
+              onPressed: (){
+                Navigator.pop(context);
+              },
+              child: Text("Cancelar",style: TextStyle(
+                fontSize: 19.0, color: Colors.deepOrange[400]
+              ),)
+          ),
+          FlatButton(
+              onPressed: () async {
+
+                await ChacaraModel.of(context).Salvar(PessoaModel.of(context).cdg);
+
+                ChacaraModel.of(context).ConverteListaFotos(widget.CapaPrincipal??"");
+
+                await ChacaraModel.of(context).SalvarFotosBanco();
+                print("cdgChacara = ${ChacaraModel.of(context).cdgchacara}");
+
+                Navigator.push(context, MaterialPageRoute(builder: (context) => home()));
+
+
+//                Navigator.push(
+//                    context,
+//                    MaterialPageRoute(
+//                        builder: (context) => PaginaChacara(context, Fotos)));
+              },
+              child: Text("Salvar",style: TextStyle(
+                  fontSize: 19.0, color: Colors.green[800]
+              ),)
+          )
+        ],
+        content: Text("Deseja salvar a Página da Chácara e retornar à Página Principal?",
+        style: TextStyle(fontSize: 18.0),),
+      ),
+    );
+  }
+  
 }
 
 Widget Estimativa() {

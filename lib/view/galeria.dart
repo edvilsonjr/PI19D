@@ -54,29 +54,17 @@ class _GaleriaState extends State<Galeria> {
               child: GaleriaImagem(context),
             ),
             RaisedButton(
-              onPressed: () async {
-
-                 await ChacaraModel.of(context).Salvar(PessoaModel.of(context).cdg);
-
-                 ChacaraModel.of(context).ConverteListaFotos(Fotos);
-
-                 await ChacaraModel.of(context).SalvarFotosBanco();
-                  print("cdgChacara = ${ChacaraModel.of(context).cdgchacara}");
-
-
+              shape: RoundedRectangleBorder(
+                borderRadius: new BorderRadius.circular(25.0),
+              ),
+              onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
                         builder: (context) => PaginaChacara(context, Fotos)));
               },
               color: Colors.green[300],
-              child: Text(
-                "Finalizar",
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: Colors.white,
-                    fontSize: 18.0),
-              ),
+              child: Icon(Icons.arrow_forward, color: Colors.white, size: 30.0),
             )
           ],
         ),
@@ -122,7 +110,11 @@ class _GaleriaState extends State<Galeria> {
                                 StorageUploadTask task = FirebaseStorage
                                     .instance
                                     .ref()
-                                    .child("foto" + index.toString()+ChacaraModel.of(context).cdgchacara.toString()) //nome do arquivo
+                                    .child("foto" +
+                                        index.toString() +
+                                        ChacaraModel.of(context)
+                                            .cdgchacara
+                                            .toString()) //nome do arquivo
                                     .putFile(file);
 
                                 StorageTaskSnapshot taskSnapshot =
@@ -164,7 +156,6 @@ class _GaleriaState extends State<Galeria> {
                                 setState(() {
                                   Fotos[index] = url;
                                 });
-
                               }
                             });
                           },

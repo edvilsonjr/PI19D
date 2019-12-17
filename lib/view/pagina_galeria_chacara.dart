@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 
 class PaginaGaleria extends StatefulWidget {
+  Map<int, dynamic> Fotos = Map();
+
+  PaginaGaleria({this.Fotos});
   @override
   _PaginaGaleriaState createState() => _PaginaGaleriaState();
 }
 
 class _PaginaGaleriaState extends State<PaginaGaleria> {
-  Map<int, dynamic> Fotos = Map();
+
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +30,7 @@ class _PaginaGaleriaState extends State<PaginaGaleria> {
       body: Column(
         children: <Widget>[
           Expanded(
-            child: GaleriaFotos(context, Fotos),
+            child: GaleriaFotos(context, widget.Fotos),
           ),
         ],
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
+import 'package:pi/model/chacara_model.dart';
 
 class Diarias extends StatefulWidget {
   PageController page = PageController();
@@ -10,32 +11,13 @@ class Diarias extends StatefulWidget {
 }
 
 class _DiariasState extends State<Diarias> {
-  //CheckBox
-  bool segunda = false;
-  bool terca = false;
-  bool quarta = false;
-  bool quinta = false;
-  bool sexta = false;
-  bool sabado = false;
-  bool domingo = false;
-
   //Mascara do R$
-  MoneyMaskedTextController valordiaria = MoneyMaskedTextController(
+  MoneyMaskedTextController valorseg = MoneyMaskedTextController(
       leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
-//  MoneyMaskedTextController valorseg = MoneyMaskedTextController(
-//      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
-//  MoneyMaskedTextController valorter = MoneyMaskedTextController(
-//      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
-//  MoneyMaskedTextController valorqua = MoneyMaskedTextController(
-//      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
-//  MoneyMaskedTextController valorqui = MoneyMaskedTextController(
-//      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
-//  MoneyMaskedTextController valorsex = MoneyMaskedTextController(
-//      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
-//  MoneyMaskedTextController valorsab = MoneyMaskedTextController(
-//      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
-//  MoneyMaskedTextController valordom = MoneyMaskedTextController(
-//      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
+  MoneyMaskedTextController valorsex = MoneyMaskedTextController(
+      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
+  MoneyMaskedTextController valorferiado = MoneyMaskedTextController(
+      leftSymbol: "R\$ ", thousandSeparator: ".", decimalSeparator: ",");
 
   /*---------------------------voltar a pagina--------------------------------*/
   Future<bool> jumpPagina() async {
@@ -67,275 +49,40 @@ class _DiariasState extends State<Diarias> {
               Padding(
                 padding: const EdgeInsets.only(left: 10.0, top: 8.0),
                 child: Text(
-                  "Os valores das diárias são diferentes de acordo com o dia da semana?",
+                  "Informe os valores das diárias de acordo com os dias da semana:",
                   style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
                 ),
               ),
-              Text("Exemplo:"),
-              Text("De segunda a quinta: R\$ 200,00"),
-              Text("De sexta a domingo: R\$ 300,00"),
-              Text("Feriado: R\$ 350,00"),
-//              TextField(
-//                decoration: InputDecoration(
-//                  labelText: "Valor da Diária",
-//                  labelStyle: TextStyle(color: Colors.green[800], fontSize: 20.0),
-//                  hintText: "R\$",
-//                ),
-//                controller: valordiaria,
-//                keyboardType: TextInputType.numberWithOptions(decimal: true),
-//              ),
-//              Padding(
-//                padding: const EdgeInsets.only(right: 30.0),
-//                child: Row(
-//                  children: <Widget>[
-//                    Expanded(
-//                      child: Checkbox(
-//                          activeColor: Colors.green[200],
-//                          value: segunda,
-//                          onChanged: (bool value) {
-//                            setState(() {
-//                              segunda = value;
-//                            });
-//                          }),
-//                    ),
-//                    Expanded(
-//                        child: Text(
-//                      "Segunda",
-//                      style: TextStyle(fontSize: 19),
-//                    )),
-//                    Expanded(
-//                      child: Padding(
-//                        padding: const EdgeInsets.only(right: 15.0),
-//                        child: TextField(
-//                          enabled: segunda,
-//                          controller: valorseg,
-//                          keyboardType:
-//                              TextInputType.numberWithOptions(decimal: true),
-//                          decoration: InputDecoration(
-//                            hintText: "R\$",
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
-//              Padding(
-//                padding: const EdgeInsets.only(right: 30.0),
-//                child: Row(
-//                  children: <Widget>[
-//                    Expanded(
-//                      child: Checkbox(
-//                          activeColor: Colors.green[200],
-//                          value: terca,
-//                          onChanged: (bool value) {
-//                            setState(() {
-//                              terca = value;
-//                            });
-//                          }),
-//                    ),
-//                    Expanded(
-//                        child: Text(
-//                      "Terça",
-//                      style: TextStyle(fontSize: 19),
-//                    )),
-//                    Expanded(
-//                      child: Padding(
-//                        padding: const EdgeInsets.only(right: 15.0),
-//                        child: TextField(
-//                          enabled: terca,
-//                          controller: valorter,
-//                          keyboardType:
-//                              TextInputType.numberWithOptions(decimal: true),
-//                          decoration: InputDecoration(
-//                            hintText: "R\$",
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
-//              Padding(
-//                padding: const EdgeInsets.only(right: 30.0),
-//                child: Row(
-//                  children: <Widget>[
-//                    Expanded(
-//                      child: Checkbox(
-//                          activeColor: Colors.green[200],
-//                          value: quarta,
-//                          onChanged: (bool value) {
-//                            setState(() {
-//                              quarta = value;
-//                            });
-//                          }),
-//                    ),
-//                    Expanded(
-//                        child: Text(
-//                      "Quarta",
-//                      style: TextStyle(fontSize: 19),
-//                    )),
-//                    Expanded(
-//                      child: Padding(
-//                        padding: const EdgeInsets.only(right: 15.0),
-//                        child: TextField(
-//                          enabled: quarta,
-//                          controller: valorqua,
-//                          keyboardType:
-//                              TextInputType.numberWithOptions(decimal: true),
-//                          decoration: InputDecoration(
-//                            hintText: "R\$",
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
-//              Padding(
-//                padding: const EdgeInsets.only(right: 30.0),
-//                child: Row(
-//                  children: <Widget>[
-//                    Expanded(
-//                      child: Checkbox(
-//                          activeColor: Colors.green[200],
-//                          value: quinta,
-//                          onChanged: (bool value) {
-//                            setState(() {
-//                              quinta = value;
-//                            });
-//                          }),
-//                    ),
-//                    Expanded(
-//                        child: Text(
-//                      "Quinta",
-//                      style: TextStyle(fontSize: 19),
-//                    )),
-//                    Expanded(
-//                      child: Padding(
-//                        padding: const EdgeInsets.only(right: 15.0),
-//                        child: TextField(
-//                          enabled: quinta,
-//                          controller: valorqui,
-//                          keyboardType:
-//                              TextInputType.numberWithOptions(decimal: true),
-//                          decoration: InputDecoration(
-//                            hintText: "R\$",
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
-//              Padding(
-//                padding: const EdgeInsets.only(right: 30.0),
-//                child: Row(
-//                  children: <Widget>[
-//                    Expanded(
-//                      child: Checkbox(
-//                          activeColor: Colors.green[200],
-//                          value: sexta,
-//                          onChanged: (bool value) {
-//                            setState(() {
-//                              sexta = value;
-//                            });
-//                          }),
-//                    ),
-//                    Expanded(
-//                        child: Text(
-//                      "Sexta",
-//                      style: TextStyle(fontSize: 19),
-//                    )),
-//                    Expanded(
-//                      child: Padding(
-//                        padding: const EdgeInsets.only(right: 15.0),
-//                        child: TextField(
-//                          enabled: sexta,
-//                          controller: valorsex,
-//                          keyboardType:
-//                              TextInputType.numberWithOptions(decimal: true),
-//                          decoration: InputDecoration(
-//                            hintText: "R\$",
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
-//              Padding(
-//                padding: const EdgeInsets.only(right: 30.0),
-//                child: Row(
-//                  children: <Widget>[
-//                    Expanded(
-//                      child: Checkbox(
-//                          activeColor: Colors.green[200],
-//                          value: sabado,
-//                          onChanged: (bool value) {
-//                            setState(() {
-//                              sabado = value;
-//                            });
-//                          }),
-//                    ),
-//                    Expanded(
-//                        child: Text(
-//                      "Sábado",
-//                      style: TextStyle(fontSize: 19),
-//                    )),
-//                    Expanded(
-//                      child: Padding(
-//                        padding: const EdgeInsets.only(right: 15.0),
-//                        child: TextField(
-//                          enabled: sabado,
-//                          controller: valorsab,
-//                          keyboardType:
-//                              TextInputType.numberWithOptions(decimal: true),
-//                          decoration: InputDecoration(
-//                            hintText: "R\$",
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
-//              Padding(
-//                padding: const EdgeInsets.only(right: 30.0),
-//                child: Row(
-//                  children: <Widget>[
-//                    Expanded(
-//                      child: Checkbox(
-//                          activeColor: Colors.green[200],
-//                          value: domingo,
-//                          onChanged: (bool value) {
-//                            setState(() {
-//                              domingo = value;
-//                            });
-//                          }),
-//                    ),
-//                    Expanded(
-//                        child: Text(
-//                      "Domingo",
-//                      style: TextStyle(fontSize: 19),
-//                    )),
-//                    Expanded(
-//                      child: Padding(
-//                        padding: const EdgeInsets.only(right: 15.0),
-//                        child: TextField(
-//                          enabled: domingo,
-//                          controller: valordom,
-//                          keyboardType:
-//                              TextInputType.numberWithOptions(decimal: true),
-//                          decoration: InputDecoration(
-//                            hintText: "R\$",
-//                          ),
-//                        ),
-//                      ),
-//                    ),
-//                  ],
-//                ),
-//              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: valorseg,
+                  decoration: InputDecoration(
+                      labelText: "De segunda a quinta:",
+                      labelStyle: TextStyle(
+                          fontSize: 20.0, color: Colors.green[800])),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: valorsex,
+                  decoration: InputDecoration(
+                      labelText: "De sexta a domingo:",
+                      labelStyle: TextStyle(
+                          fontSize: 20.0, color: Colors.green[800])),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                  controller: valorferiado,
+                  decoration: InputDecoration(
+                      labelText: "Feriado:",
+                      labelStyle: TextStyle(
+                          fontSize: 20.0, color: Colors.green[800])),
+                ),
+              ),
               Padding(
                 padding: const EdgeInsets.only(top: 8.0, right: 15.0),
                 child: Row(
@@ -343,6 +90,12 @@ class _DiariasState extends State<Diarias> {
                   children: <Widget>[
                     RaisedButton(
                       onPressed: () {
+                        ChacaraModel.of(context).valorseg =
+                        valorseg == ""||valorseg == null ? "" : valorseg.text;
+                        ChacaraModel.of(context).valorseg =
+                        valorsex == ""||valorsex == null ? "" : valorsex.text;
+                        ChacaraModel.of(context).valorseg =
+                        valorferiado == ""||valorferiado == null ? "" : valorferiado.text;
                         widget.page.jumpToPage(2);
                       },
                       shape: RoundedRectangleBorder(

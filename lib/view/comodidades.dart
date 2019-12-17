@@ -22,7 +22,7 @@ class _ComodidadeState extends State<Comodidade> {
 
   TextEditingController quarto = TextEditingController();
   TextEditingController cama = TextEditingController();
-  TextEditingController banheiro= TextEditingController();
+  TextEditingController banheiro = TextEditingController();
   TextEditingController carro = TextEditingController();
   TextEditingController t110 = TextEditingController();
   TextEditingController t220 = TextEditingController();
@@ -39,31 +39,31 @@ class _ComodidadeState extends State<Comodidade> {
   @override
   void initState() {
     super.initState();
-    if(ChacaraModel.of(context).qtdquarto != null){
+    if (ChacaraModel.of(context).qtdquarto != null) {
       quarto.text = ChacaraModel.of(context).qtdquarto.toString();
     }
-    if(ChacaraModel.of(context).camas != null){
+    if (ChacaraModel.of(context).camas != null) {
       cama.text = ChacaraModel.of(context).camas.toString();
     }
-    if(ChacaraModel.of(context).qtdbanheiro != null){
+    if (ChacaraModel.of(context).qtdbanheiro != null) {
       banheiro.text = ChacaraModel.of(context).qtdbanheiro.toString();
     }
-    if(ChacaraModel.of(context).carros != null){
+    if (ChacaraModel.of(context).carros != null) {
       carro.text = ChacaraModel.of(context).carros.toString();
     }
-    if(ChacaraModel.of(context).tomada110 != null){
+    if (ChacaraModel.of(context).tomada110 != null) {
       t110.text = ChacaraModel.of(context).tomada110.toString();
     }
-    if(ChacaraModel.of(context).tomada220 != null){
+    if (ChacaraModel.of(context).tomada220 != null) {
       t220.text = ChacaraModel.of(context).tomada220.toString();
     }
-    if(ChacaraModel.of(context).piscina ){
+    if (ChacaraModel.of(context).piscina) {
       pisc.text = ChacaraModel.of(context).piscina.toString();
     }
-    if(ChacaraModel.of(context).areacoberta ){
+    if (ChacaraModel.of(context).areacoberta) {
       acoberta.text = ChacaraModel.of(context).areacoberta.toString();
     }
-    if(ChacaraModel.of(context).churrasqueira ){
+    if (ChacaraModel.of(context).churrasqueira) {
       churras.text = ChacaraModel.of(context).churrasqueira.toString();
     }
   }
@@ -404,28 +404,28 @@ class _ComodidadeState extends State<Comodidade> {
                       onPressed: () {
                         //ChacaraModel.of(context).quarto = qtdquartos;
                         ChacaraModel.of(context).qtdquarto =
-                          quarto.text != "" ? int.parse(quarto.text) : 0;
+                            quarto.text != "" ? int.parse(quarto.text) : 0;
 //                        ChacaraModel.of(context).camas =
-//                            qtdquartos ? int.parse(cama.text) : 0;
-//                        ChacaraModel.of(context).banheiro = qtdbanheiro;
-//                        ChacaraModel.of(context).qtdbanheiro =
-//                            qtdbanheiro ? int.parse(banheiro.text) : 0;
-//                        ChacaraModel.of(context).estacionamento =
-//                            estacionamento;
-//                        ChacaraModel.of(context).carros =
-//                            estacionamento ? int.parse(carro.text) : 0;
-//                        ChacaraModel.of(context).tomada110 =
-//                            tomada110 ? int.parse(t110.text) : 0;
-//                        ChacaraModel.of(context).tomada220 =
-//                            tomada220 ? int.parse(t220.text) : 0;
-//                        ChacaraModel.of(context).piscina = piscina;
-//                        ChacaraModel.of(context).obspiscina = pisc.text ?? "";
+//                            qtdquarto ? int.parse(cama.text) : 0;
+                        ChacaraModel.of(context).banheiro = qtdbanheiro;
+                        ChacaraModel.of(context).qtdbanheiro =
+                            qtdbanheiro ? int.parse(banheiro.text) : 0;
+                        ChacaraModel.of(context).estacionamento =
+                            estacionamento;
+                        ChacaraModel.of(context).carros =
+                            estacionamento ? int.parse(carro.text) : 0;
+                        ChacaraModel.of(context).tomada110 =
+                            tomada110 ? int.parse(t110.text) : 0;
+                        ChacaraModel.of(context).tomada220 =
+                            tomada220 ? int.parse(t220.text) : 0;
+                        ChacaraModel.of(context).piscina = piscina;
+                        ChacaraModel.of(context).obspiscina = pisc.text ?? "";
                         ChacaraModel.of(context).churrasqueira = churrasqueira;
-//                        ChacaraModel.of(context).obschurras =
-//                            churras.text ?? "";
-//                        ChacaraModel.of(context).areacoberta = areacoberta;
-//                        ChacaraModel.of(context).obsareacoberta =
-//                            acoberta.text ?? "";
+                        ChacaraModel.of(context).obschurras =
+                            churras.text ?? "";
+                        ChacaraModel.of(context).areacoberta = areacoberta;
+                        ChacaraModel.of(context).obsareacoberta =
+                            acoberta.text ?? "";
 
                         widget.page.jumpToPage(3);
                       },

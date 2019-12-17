@@ -14,7 +14,8 @@ class ChacaraModel extends Model {
   String bairro;
   int numero;
 //Diaria
-  int valordiaria, cdgchacara;
+  String valorseg, valorsex, valorferiado;
+  int cdgchacara;
 //Comodidades
   bool quarto = false,
       banheiro = false,
